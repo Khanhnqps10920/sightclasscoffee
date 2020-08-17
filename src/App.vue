@@ -1,32 +1,129 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Navbar />
+    <NavbarScroll :isActive="scrollNavbarActive" />
     <router-view />
   </div>
 </template>
 
+<script>
+import Navbar from "./components/Navbar/Navbar";
+import NavbarScroll from "./components/Navbar/NavbarOnScroll";
+export default {
+  components: {
+    Navbar,
+    NavbarScroll
+  },
+
+  data() {
+    return {
+      scrollNavbarActive: false
+    };
+  },
+
+  methods: {
+    // navbar scroll
+    handleScroll() {
+      if (window.pageYOffset > 80) {
+        this.scrollNavbarActive = true;
+      } else this.scrollNavbarActive = false;
+    }
+  },
+
+  created() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootstrap-vue/src/index.scss";
+@import "./assets/scss/variable.scss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-#nav {
-  padding: 30px;
+html {
+  font-size: 10px;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+body {
+  position: relative;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Pangolin", cursive;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+span,
+p,
+a {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.6rem;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+button.btn-add {
+  outline: none;
+  background: transparent;
+  border: $border;
+  color: $base-color;
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 1.6rem;
+  padding: 5px 10px;
+  transition: 0.4s ease;
+}
+
+button.btn-add:hover {
+  color: $white-color;
+  background: $base-color;
+}
+
+.drop-down-enter-active {
+  animation: drop-down 0.5s;
+}
+.drop-down-leave-active {
+  animation: drop-down 0.5s reverse;
+}
+
+@keyframes drop-down {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+
+  50% {
+    height: 50%;
+    opactiy: 0.5;
+  }
+
+  100% {
+    height: 100%;
+    opacity: 1;
   }
 }
 </style>
