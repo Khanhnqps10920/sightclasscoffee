@@ -1,24 +1,33 @@
 <template>
-  <nav class="navbar">
-    <ul class="navbar__list">
-      <li class="navbar__item">
-        <router-link to="/">Home</router-link>
-      </li>
-      <li class="navbar__item">
-        <router-link to="/shop">Shop</router-link>
-      </li>
-      <li class="navbar__item">
-        <router-link to="/link">Link</router-link>
-      </li>
-      <li class="navbar__item">
-        <router-link to="about">About</router-link>
-      </li>
-    </ul>
-  </nav>
+  <transition name="height">
+    <nav v-if="isActive" class="navbar">
+      <ul class="navbar__list">
+        <li class="navbar__item">
+          <router-link to="/">Home</router-link>
+        </li>
+        <li class="navbar__item">
+          <router-link to="/shop">Shop</router-link>
+        </li>
+        <li class="navbar__item">
+          <router-link to="/link">Link</router-link>
+        </li>
+        <li class="navbar__item">
+          <router-link to="about">About</router-link>
+        </li>
+      </ul>
+    </nav>
+  </transition>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    isActive: {
+      type: Boolean,
+      default: false
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -28,8 +37,8 @@ export default {};
   width: 100%;
   background: $base-color;
   padding: 0;
-  height: 0;
-  visibility: hidden;
+
+  transform-origin: top;
 
   &__list {
     margin: 2rem;

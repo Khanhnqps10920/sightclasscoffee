@@ -1,7 +1,7 @@
 <template>
   <transition name="drop-down">
     <div v-if="isActive" class="navbar-scroll">
-      <b-navbar fixed="top" variant="light" class="navbar-scroll__nav" toggleable="lg">
+      <b-navbar variant="light" class="navbar-scroll__nav" toggleable="lg">
         <b-navbar-brand tag="div" class="navbar-scroll__brand">
           <b-link to="/">
             <svg
@@ -37,10 +37,10 @@
         </b-navbar-brand>
 
         <b-navbar-nav class="ml-auto navbar-scroll__list-item">
-          <b-nav-item class="navbar-scroll__icon">
+          <b-nav-item v-b-toggle.sidebar-backdrop class="navbar-scroll__icon">
             <b-icon icon="cart4"></b-icon>
           </b-nav-item>
-          <b-nav-item class="navbar-scroll__icon">
+          <b-nav-item class="navbar-scroll__icon" @click="onMenuClick">
             <b-icon icon="text-right" aria-label="nav"></b-icon>
           </b-nav-item>
         </b-navbar-nav>
@@ -55,12 +55,16 @@ export default {
     isActive: {
       type: Boolean,
       default: false
+    },
+
+    onMenuClick: {
+      type: Function
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 @import "../../assets/scss/variable.scss";
 
 .navbar-scroll {

@@ -1,32 +1,58 @@
 <template>
   <div id="app">
-    <Navbar />
-    <NavbarScroll :isActive="scrollNavbarActive" />
+    <div class="navbar-wrapper">
+      <Navbar :isActive="navbarActive" />
+      <NavbarScroll :isActive="scrollNavbarActive" :onMenuClick="handleMenuClick" />
+    </div>
+    <SideBar />
+
     <router-view />
   </div>
 </template>
 
 <script>
+// component
 import Navbar from "./components/Navbar/Navbar";
 import NavbarScroll from "./components/Navbar/NavbarOnScroll";
+import SideBar from "./components/CartSideBar/CartSideBar";
+
+// libs
+import { mapState, mapMutations } from "vuex";
+
 export default {
   components: {
     Navbar,
-    NavbarScroll
+    NavbarScroll,
+    SideBar
   },
 
+  // data
   data() {
     return {
       scrollNavbarActive: false
     };
   },
 
+  // computed
+  computed: {
+    ...mapState("navbar", ["navbarActive"])
+  },
+  // methods
   methods: {
+    ...mapMutations("navbar", ["handleNavbarActive"]),
     // navbar scroll
     handleScroll() {
       if (window.pageYOffset > 80) {
         this.scrollNavbarActive = true;
-      } else this.scrollNavbarActive = false;
+      } else {
+        this.scrollNavbarActive = false;
+        this.navbarActive = false;
+      }
+    },
+
+    // navbar normal
+    handleMenuClick() {
+      this.handleNavbarActive();
     }
   },
 
@@ -103,6 +129,17 @@ button.btn-add:hover {
   background: $base-color;
 }
 
+.navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+// animation
+
+// dropdown
 .drop-down-enter-active {
   animation: drop-down 0.5s;
 }
@@ -124,6 +161,30 @@ button.btn-add:hover {
   100% {
     height: 100%;
     opacity: 1;
+  }
+}
+
+// height
+
+.height-enter-active {
+  animation: drop-top 0.5s;
+}
+
+.height-leave-active {
+  animation: drop-top 0.5s reverse;
+}
+
+@keyframes drop-top {
+  0% {
+    transform: scaleY(0.5);
+  }
+
+  50% {
+    transform: scaleY(1.2);
+  }
+
+  100% {
+    transform: scaleY(1);
   }
 }
 </style>
