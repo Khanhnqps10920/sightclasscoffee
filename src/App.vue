@@ -7,6 +7,8 @@
     <SideBar />
 
     <router-view />
+
+    <Footer />
   </div>
 </template>
 
@@ -15,6 +17,7 @@
 import Navbar from "./components/Navbar/Navbar";
 import NavbarScroll from "./components/Navbar/NavbarOnScroll";
 import SideBar from "./components/CartSideBar/CartSideBar";
+import Footer from "./components/Footer/Footer.vue";
 
 // libs
 import { mapState, mapMutations } from "vuex";
@@ -23,7 +26,8 @@ export default {
   components: {
     Navbar,
     NavbarScroll,
-    SideBar
+    SideBar,
+    Footer
   },
 
   // data
@@ -46,7 +50,6 @@ export default {
         this.scrollNavbarActive = true;
       } else {
         this.scrollNavbarActive = false;
-        this.navbarActive = false;
       }
     },
 
@@ -112,7 +115,7 @@ ul {
   list-style-type: none;
 }
 
-button.btn-add {
+.btn-add {
   outline: none;
   background: transparent;
   border: $border;
@@ -124,7 +127,7 @@ button.btn-add {
   transition: 0.4s ease;
 }
 
-button.btn-add:hover {
+.btn-add:hover {
   color: $white-color;
   background: $base-color;
 }

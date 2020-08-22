@@ -3,6 +3,7 @@
     <b-navbar-brand tag="div" class="navbar-scroll__brand">
       <b-link to="/">
         <svg
+          v-if="!isShop"
           version="1.1"
           id="Layer_1"
           xmlns="http://www.w3.org/2000/svg"
@@ -31,6 +32,37 @@
             />
           </g>
         </svg>
+
+        <svg
+          v-if="isShop"
+          version="1.1"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          x="0px"
+          y="0px"
+          width="102px"
+          height="10px"
+          viewBox="0 0 102 10"
+          enable-background="new 0 0 102 10"
+          xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xml:space="preserve"
+          class="bolt-logo"
+        >
+          <title>Sightglass Coffee</title>
+          <desc>Created with Sketch.</desc>
+          <g>
+            <polyline
+              fill="none"
+              stroke="#522e1f"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-miterlimit="10"
+              points="100.475,2.837 65.47,8.263 68.913,1.998 35.003,8.215 37.913,2.514 1.55,8.501"
+            />
+          </g>
+        </svg>
       </b-link>
     </b-navbar-brand>
 
@@ -38,10 +70,14 @@
       <b-nav-item
         v-b-toggle.sidebar-backdrop
         class="navbar-scroll__icon hero__icon navbar__list-item"
+        :class="{ shop: isShop }"
       >
         <b-icon icon="cart4"></b-icon>
       </b-nav-item>
-      <b-nav-item class="navbar-scroll__icon hero__icon navbar__list-item">
+      <b-nav-item
+        class="navbar-scroll__icon hero__icon navbar__list-item"
+        :class="{ shop: isShop }"
+      >
         <b-icon icon="text-right" aria-label="nav" @click="onMenuClick"></b-icon>
       </b-nav-item>
     </b-navbar-nav>
@@ -54,6 +90,11 @@ export default {
     onMenuClick: {
       type: Function,
       default: () => 1
+    },
+
+    isShop: {
+      type: Boolean,
+      default: false
     }
   }
 };
@@ -63,6 +104,10 @@ export default {
 @import "../../assets/scss/variable.scss";
 .navbar-scroll__icon a.nav-link {
   color: $white-color !important;
+}
+
+.navbar-scroll__icon.shop a.nav-link {
+  color: $base-color !important;
 }
 
 @include mobile {
