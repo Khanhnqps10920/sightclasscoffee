@@ -2,10 +2,11 @@
   <div class="shop page">
     <b-container fluid>
       <NavbarInside :isShop="true" />
-      <ShopHero />
-
-      <router-view />
     </b-container>
+
+    <ShopHero />
+
+    <router-view />
   </div>
 </template>
 

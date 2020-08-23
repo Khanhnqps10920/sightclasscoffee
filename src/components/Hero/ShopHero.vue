@@ -1,25 +1,24 @@
 <template>
   <section class="shop-hero text-center">
-    <h1 class="shop-hero__title">Shop</h1>
+    <b-container fluid>
+      <h1 class="shop-hero__title">Shop</h1>
 
-    <ul class="shop-hero__categories d-flex justify-content-center">
-      <li class="shop-hero__categories-item">
-        <router-link to="/coffee">All</router-link>
-      </li>
-      <li class="shop-hero__categories-item">
-        <router-link to="/coffee">Coffee</router-link>
-      </li>
-      <li class="shop-hero__categories-item">
-        <router-link to="/brewing-tools">Brewing Tools</router-link>
-      </li>
-      <li class="shop-hero__categories-item">
-        <router-link to="/goods">Goods</router-link>
-      </li>
-    </ul>
+      <ul class="shop-hero__categories d-flex justify-content-center">
+        <li class="shop-hero__categories-item">
+          <a href="#firstSection" v-smooth-scroll>Coffee</a>
+        </li>
+        <li class="shop-hero__categories-item">
+          <a href="#secondSection" v-smooth-scroll>Brewing Tools</a>
+        </li>
+        <li class="shop-hero__categories-item">
+          <a href="#thirdSection" v-smooth-scroll>Goods</a>
+        </li>
+      </ul>
 
-    <div class="shop-hero__banner">
-      <img src="../../assets/images/hero-banner.jpg" alt="hero-banner" class="img-fluid" />
-    </div>
+      <div class="shop-hero__banner">
+        <img src="../../assets/images/hero-banner.jpg" alt="hero-banner" class="img-fluid" />
+      </div>
+    </b-container>
   </section>
 </template>
 

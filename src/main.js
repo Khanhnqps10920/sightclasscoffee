@@ -2,7 +2,16 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+
+// libs
+import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import VueSmoothScroll from "vue2-smooth-scroll";
+
+Vue.use(VueSmoothScroll, {
+  duration: 1000,
+  updateHistory: false,
+  offset: -50
+});
 
 Vue.use(BootstrapVue);
 

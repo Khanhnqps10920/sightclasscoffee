@@ -21,13 +21,18 @@ const routes = [
   },
 
   {
-    path: "/shop",
-    name: "shop",
+    path: "/collection",
+    name: "collectionAll",
     component: () => import("../views/Shop.vue"),
     children: [
       {
         path: "/",
         component: () => import("../components/Shop/Collections.vue")
+      },
+
+      {
+        path: ":category",
+        component: () => import("../components/Shop/CollectionsByCategory.vue")
       }
     ]
   }
