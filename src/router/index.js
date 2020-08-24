@@ -35,12 +35,22 @@ const routes = [
         component: () => import("../components/Shop/CollectionsByCategory.vue")
       }
     ]
+  },
+
+  {
+    path: "/checkout",
+    name: "checkOut",
+    component: () => import("../views/CheckOut.vue")
   }
 
 
 ];
 
 const router = new VueRouter({
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
+  mode: "history",
   routes
 });
 
