@@ -2,7 +2,7 @@
   <div class="checkout page">
     <b-container fluid>
       <b-row>
-        <b-col sm="7">
+        <b-col sm="8">
           <div class="checkout__information">
             <div class="checkout__information--logo">
               <img
@@ -19,9 +19,29 @@
             <CheckOutForm />
           </div>
         </b-col>
-        <b-col sm="5">
+        <b-col sm="4">
           <div class="checkout__total">
-            <h3>test</h3>
+            <div class="checkout__total--cart">
+              <div
+                class="checkout__total--cart-item d-flex justify-content-between align-items-center"
+              >
+                <div class="d-flex align-items-center">
+                  <div class="checkout__total--cart-item-img">
+                    <b-img
+                      src="https://picsum.photos/250/250/?image=54"
+                      thumbnail
+                      fluid
+                      alt="img cart"
+                    ></b-img>
+                  </div>
+                  <div class="checkout__total--cart-item-name">
+                    <h3>Item Name</h3>
+                    <p>Item Information</p>
+                  </div>
+                </div>
+                <p class="checkout__total--cart-item-price">$20.00</p>
+              </div>
+            </div>
           </div>
         </b-col>
       </b-row>
@@ -79,7 +99,30 @@ export default {
   // total
   &__total {
     position: fixed;
-    padding: 8rem 0;
+    padding: 8rem 4rem;
+
+    &--cart {
+      &-item {
+        &-img {
+          width: 15%;
+        }
+
+        &-name {
+          margin: 0 2rem;
+
+          h3 {
+            font-weight: bold;
+            font-size: 2rem;
+          }
+
+          p {
+            font-weight: normal;
+            font-size: 1.2rem;
+            letter-spacing: 0.3rem;
+          }
+        }
+      }
+    }
   }
 }
 </style>
