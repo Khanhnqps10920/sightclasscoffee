@@ -1,6 +1,6 @@
 <template>
-  <div class="home page">
-    <HeroSection :onMenuClick="handleMenuClick" :navbarActive="navbarActive" />
+  <div class="home page" :class="{ transformY: navbarActive }">
+    <HeroSection :onMenuClick="handleMenuClick" />
 
     <!-- section -->
     <Section title="New Arrivals">

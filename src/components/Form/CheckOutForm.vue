@@ -50,32 +50,6 @@ export default {};
 <style lang="scss" >
 @import "../../assets/scss/variable.scss";
 
-.custom-checkbox .custom-control-label::before {
-  background-color: none;
-  outline: none;
-}
-.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: $base-color;
-  border-color: $base-color;
-  outline: none;
-}
-
-.custom-control-input:focus {
-  border-color: #522e1f;
-  box-shadow: 0 0 0 0.2rem #795548;
-}
-
-.form-group {
-  input {
-    padding: 2rem 1rem;
-
-    &:focus {
-      border-color: $base-color;
-      box-shadow: 0 0 0 0.2rem #795548;
-    }
-  }
-}
-
 .checkout-form {
   &__inps {
     .form-group {

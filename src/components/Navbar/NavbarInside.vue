@@ -78,24 +78,25 @@
         class="navbar-scroll__icon hero__icon navbar__list-item"
         :class="{ shop: isShop }"
       >
-        <b-icon icon="text-right" aria-label="nav" @click="onMenuClick"></b-icon>
+        <b-icon icon="text-right" aria-label="nav" @click="handleNavbarActive"></b-icon>
       </b-nav-item>
     </b-navbar-nav>
   </b-navbar>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   props: {
-    onMenuClick: {
-      type: Function,
-      default: () => 1
-    },
-
     isShop: {
       type: Boolean,
       default: false
     }
+  },
+
+  methods: {
+    ...mapMutations("navbar", ["handleNavbarActive"])
   }
 };
 </script>

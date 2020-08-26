@@ -40,7 +40,7 @@
           <b-nav-item v-b-toggle.sidebar-backdrop class="navbar-scroll__icon">
             <b-icon icon="cart4"></b-icon>
           </b-nav-item>
-          <b-nav-item class="navbar-scroll__icon" @click="onMenuClick">
+          <b-nav-item class="navbar-scroll__icon" @click="handleNavbarActive">
             <b-icon icon="text-right" aria-label="nav"></b-icon>
           </b-nav-item>
         </b-navbar-nav>
@@ -50,16 +50,18 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   props: {
     isActive: {
       type: Boolean,
       default: false
-    },
-
-    onMenuClick: {
-      type: Function
     }
+  },
+
+  methods: {
+    ...mapMutations("navbar", ["handleNavbarActive"])
   }
 };
 </script>

@@ -2,7 +2,7 @@
   <div id="app">
     <div class="navbar-wrapper">
       <Navbar :isActive="navbarActive" />
-      <NavbarScroll :isActive="scrollNavbarActive" :onMenuClick="handleMenuClick" />
+      <NavbarScroll :isActive="scrollNavbarActive" />
     </div>
     <SideBar />
 
@@ -113,6 +113,74 @@ ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $base-color;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.page {
+  transition: 0.4s ease;
+}
+
+.page.transformY {
+  transform: translateY(80px);
+}
+
+.b-sidebar {
+  width: 400px;
+}
+
+.custom-checkbox .custom-control-label::before {
+  background-color: none;
+  outline: none;
+}
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: $base-color;
+  border-color: $base-color;
+  outline: none;
+}
+
+.custom-control-input:focus {
+  border-color: #522e1f;
+  box-shadow: 0 0 0 0.2rem #795548;
+}
+
+.form-group {
+  input {
+    padding: 2rem 1rem;
+
+    &:focus {
+      border-color: $base-color;
+      box-shadow: 0 0 0 0.2rem #795548;
+    }
+  }
 }
 
 .btn-add {

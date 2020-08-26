@@ -1,5 +1,5 @@
 <template>
-  <section class="hero" :class="{ transformY: navbarActive }">
+  <section class="hero">
     <b-container>
       <NavbarInside :onMenuClick="onMenuClick" />
 
@@ -47,10 +47,6 @@ export default {
 @import "../../assets/scss/variable.scss";
 
 .hero {
-  &.transformY {
-    transform: translateY(80px);
-  }
-
   height: 100vh;
   background-image: linear-gradient(
       rgba(82, 46, 36, 0.5),
@@ -59,7 +55,6 @@ export default {
     url("../../assets/images/sub_web.webp");
   background-position: center;
   background-size: cover;
-  transition: 0.4s ease;
 
   &__content {
     max-width: 80%;
