@@ -1,8 +1,6 @@
 <template>
   <div class="product page" :class="{ transformY: navbarActive }">
     <b-container fluid>
-      <NavbarInside :isShop="true" />
-
       <b-row>
         <b-col class="product__left-side" sm="6">
           <div class="product__inner">
