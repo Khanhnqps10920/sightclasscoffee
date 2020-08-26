@@ -65,18 +65,18 @@ export default {};
   box-shadow: 0 0 0 0.2rem #795548;
 }
 
-.checkout-form {
-  .form-group {
-    input {
-      padding: 2rem 1rem;
+.form-group {
+  input {
+    padding: 2rem 1rem;
 
-      &:focus {
-        border-color: $base-color;
-        box-shadow: 0 0 0 0.2rem #795548;
-      }
+    &:focus {
+      border-color: $base-color;
+      box-shadow: 0 0 0 0.2rem #795548;
     }
   }
+}
 
+.checkout-form {
   &__inps {
     .form-group {
       width: 49%;

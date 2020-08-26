@@ -42,6 +42,39 @@
                 <p class="checkout__total--cart-item-price">$20.00</p>
               </div>
             </div>
+
+            <hr />
+            <b-form-group>
+              <b-form-input type="text" placeholder="Gift card or discount code"></b-form-input>
+            </b-form-group>
+
+            <hr />
+
+            <div class="checkout__total--fee">
+              <div class="d-flex justify-content-between align-items-center">
+                <p>Subtotal</p>
+                <p>
+                  <strong>$18.00</strong>
+                </p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <p>Shipping</p>
+                <p>
+                  <strong>calculated at next step</strong>
+                </p>
+              </div>
+            </div>
+
+            <hr />
+
+            <div
+              class="checkout__total--totalfee d-flex justify-content-between align-items-center"
+            >
+              <p>Total</p>
+              <p>
+                <strong>$18.00</strong>
+              </p>
+            </div>
           </div>
         </b-col>
       </b-row>
@@ -122,6 +155,11 @@ export default {
           }
         }
       }
+    }
+
+    hr {
+      border-color: #e6e6e6;
+      margin: 3rem 0;
     }
   }
 }
