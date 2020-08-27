@@ -7,29 +7,101 @@
             <img src="@/assets/images/product.webp" alt="product-img" />
           </div>
         </b-col>
-        <b-col class="product__right-side" sm="6"></b-col>
+        <b-col class="product__right-side" sm="6">
+          <div class="product__information">
+            <p class="product__information--type">EXPRESSO</p>
+            <h1 class="product__information--name">Owl's Howl</h1>
+
+            <div class="product__information--material">
+              <span>Cacao,</span>
+              <span>Stone Fruit,</span>
+              <span>Candie Orange Peel</span>
+            </div>
+
+            <div
+              class="product__information--price d-flex align-items-center justify-content-center"
+            >
+              <div class="product__information--price-onet">
+                <p>
+                  One Time:
+                  <strong>$108.00</strong>
+                </p>
+              </div>
+              <div class="product__information--price-size">
+                <b-form-group label="SIZE">
+                  <b-form-select v-model="selected">
+                    <b-form-select-option :value="null">5oz</b-form-select-option>
+                    <b-form-select-option value="a">Option A</b-form-select-option>
+                  </b-form-select>
+                </b-form-group>
+              </div>
+            </div>
+
+            <div class="product__information--add d-flex justify-content-center align-items-center">
+              <div class="product__information--add-quantity">
+                <span>Qty</span>
+                <input type="number" value="1" />
+              </div>
+
+              <button class="btn-add">Add To Card</button>
+            </div>
+
+            <div class="product__information--detail">
+              <h2>Coffee Detail</h2>
+              <p>While components and flavors change seasonally, our flagship Owl’s Howl Espresso invariably delivers a balanced, and refined espresso experience. We rotate the components that comprise this blend throughout the year to ensure optimal freshness, giving us the opportunity to showcase beautiful coffees that pair well together.</p>
+              <p>Placing a bulk order? See our FAQ page for more details.</p>
+            </div>
+          </div>
+        </b-col>
       </b-row>
     </b-container>
+    <section class="product__arrival">
+      <h3 class="text-center">RECENT ARRIVALS</h3>
+      <b-container fluid>
+        <b-row>
+          <b-col cols="12" sm="12" md="6" lg="4">
+            <ShopItem :whiteMode="true" />
+          </b-col>
+          <b-col cols="12" sm="12" md="6" lg="4">
+            <ShopItem :whiteMode="true" />
+          </b-col>
+          <b-col cols="12" sm="12" md="6" lg="4">
+            <ShopItem :whiteMode="true" />
+          </b-col>
+          <b-col cols="12" sm="12" md="6" lg="4">
+            <ShopItem :whiteMode="true" />
+          </b-col>
+        </b-row>
+      </b-container>
+    </section>
   </div>
 </template>
 
 <script>
-import NavbarInside from "../components/Navbar/NavbarInside.vue";
+// import NavbarInside from "../components/Navbar/NavbarInside.vue";
+import ShopItem from "../components/Shop/ShopItem.vue";
 
 // libs
 import { mapState } from "vuex";
 
 export default {
   components: {
-    NavbarInside
+    // NavbarInside
+    ShopItem
   },
   computed: {
     ...mapState("navbar", ["navbarActive"])
+  },
+
+  data() {
+    return {
+      selected: null
+    };
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 @import "../assets/scss/variable.scss";
 
 .product {
@@ -63,7 +135,134 @@ export default {
 
   &__right-side {
     background: #413121;
-    height: 1400px;
+  }
+
+  // right side
+
+  &__information {
+    color: $white-color;
+    text-align: center;
+    padding: 8rem 0;
+
+    &--type {
+      font-size: 1.6rem;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    &--name {
+      font-size: 6rem;
+      margin: 1rem 0;
+    }
+
+    &--material {
+      span {
+        margin: 0 0.2rem;
+        letter-spacing: 0.3rem;
+      }
+    }
+
+    &--price {
+      margin: 3rem 0;
+      &-onet {
+        padding: 2rem 1.5rem;
+        border: 0.1rem solid $white-color;
+
+        color: $white-color;
+        font-weight: bold;
+
+        margin-right: 2rem;
+      }
+
+      &-size {
+        legend {
+          text-align: left;
+          font-size: 1.6rem;
+          font-weight: bold;
+        }
+
+        select {
+          border: none;
+          outline: none;
+          background: transparent;
+          border-bottom: 0.1px solid $white-color;
+          color: $white-color;
+          font-size: 2rem;
+          height: 40px;
+          width: 150px;
+          font-weight: bold;
+          cursor: pointer;
+          background-image: url("https://cdn.shopify.com/s/files/1/0027/5382/2835/t/6/assets/down-arrow-4db6a00f6f3c7df930a3d63879a6a9d2-1.svg?14233423452345634956");
+          background-repeat: no-repeat;
+          background-size: 3.5rem;
+          filter: brightness(0) invert(1);
+          background-position: right;
+
+          &:focus {
+            outline: none;
+            border-color: $white-color;
+            box-shadow: none;
+          }
+        }
+      }
+    }
+
+    &--add {
+      &-quantity {
+        margin: 0 2rem;
+
+        span {
+          font-weight: bold;
+          margin-right: 1rem;
+          font-size: 2rem;
+        }
+
+        input {
+          width: 5.4rem;
+          height: 5.4rem;
+          border-radius: 50%;
+          border: 0.2rem solid $white-color;
+          text-align: center;
+          background: transparent;
+          font-size: 1.6rem;
+          color: $white-color;
+
+          &:focus {
+            outline: none;
+            box-shadow: none;
+          }
+        }
+      }
+
+      .btn-add {
+        border-color: $white-color;
+        color: $white-color;
+        padding: 1rem 2rem;
+      }
+    }
+
+    &--detail {
+      margin-top: 6rem;
+      text-align: left;
+
+      h2 {
+        font-size: 3rem;
+      }
+      p {
+        margin: 2rem 0;
+      }
+    }
+  }
+
+  &__arrival {
+    padding: 4rem 0;
+    background: #eceae7;
+
+    h3 {
+      font-size: 4rem;
+      margin: 3rem 0;
+      color: $base-color;
+    }
   }
 }
 </style>
