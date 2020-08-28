@@ -15,7 +15,7 @@
         >Enter code 'SUBAUGUST' at checkout to enjoy 25% off of your first 3 shipments. Offer expires 8.24.20 @ 11:59pm PST.</p>
 
         <div class="hero__content--controls text-center mt-5">
-          <b-link class="hero__content--controls-btn">Shop</b-link>
+          <b-link class="hero__content--controls-btn" to="/collection">Shop</b-link>
         </div>
       </div>
     </b-container>

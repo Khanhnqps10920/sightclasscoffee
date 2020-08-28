@@ -4,14 +4,18 @@
       <h1 class="shop-hero__title">Shop</h1>
 
       <ul class="shop-hero__categories d-flex justify-content-center">
-        <li class="shop-hero__categories-item">
+        <li class="shop-hero__categories-item" v-if="!isCategory">
           <a href="#firstSection" v-smooth-scroll>Coffee</a>
         </li>
-        <li class="shop-hero__categories-item">
+        <li class="shop-hero__categories-item" v-if="!isCategory">
           <a href="#secondSection" v-smooth-scroll>Brewing Tools</a>
         </li>
-        <li class="shop-hero__categories-item">
+        <li class="shop-hero__categories-item" v-if="!isCategory">
           <a href="#thirdSection" v-smooth-scroll>Goods</a>
+        </li>
+
+        <li class="shop-hero__categories-item" v-if="isCategory">
+          <router-link to="/collection">All Items</router-link>
         </li>
       </ul>
 
@@ -23,7 +27,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    isCategory() {
+      return this.$route.params.category ? true : false;
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

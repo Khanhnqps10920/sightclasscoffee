@@ -1,14 +1,16 @@
 <template>
   <div id="app">
-    <div class="navbar-wrapper">
+    <div class="navbar-wrapper" v-if="!$route.meta.isAdmin">
       <Navbar :isActive="navbarActive" />
       <NavbarScroll :isActive="scrollNavbarActive" />
     </div>
     <SideBar />
 
-    <router-view />
+    <vue-page-transition name="fade-in-right">
+      <router-view />
+    </vue-page-transition>
 
-    <Footer />
+    <Footer v-if="!$route.meta.isAdmin" />
   </div>
 </template>
 

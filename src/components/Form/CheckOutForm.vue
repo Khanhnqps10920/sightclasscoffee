@@ -34,7 +34,7 @@
     </b-form-group>
 
     <div class="d-flex justify-content-between align-items-center mt-3 checkout-form__buttons">
-      <router-link to="/collections">
+      <router-link to="/collection">
         <b-icon icon="arrow-left"></b-icon>Back To Shop
       </router-link>
 

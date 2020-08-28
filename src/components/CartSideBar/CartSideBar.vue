@@ -125,6 +125,10 @@ export default {};
 <style lang="scss" >
 @import "../../assets/scss/variable.scss";
 
+.b-sidebar > .b-sidebar-body {
+  overflow-y: hidden !important;
+}
+
 .b-sidebar.b-sidebar-right {
   transition: 0.4s ease !important;
   background-color: #eceae7 !important;
@@ -134,7 +138,7 @@ export default {};
   }
 
   .cart-items {
-    height: 70%;
+    height: 60%;
     overflow-y: auto;
 
     border-bottom: 0.1rem solid #d6c9c3;

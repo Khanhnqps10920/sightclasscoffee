@@ -6,6 +6,9 @@ import store from "./store";
 // libs
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import VueSmoothScroll from "vue2-smooth-scroll";
+import VuePageTransition from "vue-page-transition"
+
+Vue.use(VuePageTransition);
 
 Vue.use(VueSmoothScroll, {
   duration: 1000,
