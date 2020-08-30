@@ -29,13 +29,18 @@ export default new Vuex.Store({
       namespaced: true,
       // state 
       state: () => ({
-        navbarActive: false
+        navbarActive: false,
+        adminSidebarActive: true
       }),
 
       // mutations
       mutations: {
-        handleNavbarActive: (state) => {
-          state.navbarActive = !state.navbarActive
+        handleNavbarActive: state => {
+          state.navbarActive = !state.navbarActive;
+        },
+
+        handleAdminSidebarActive: state => {
+          state.adminSidebarActive = !state.adminSidebarActive;
         }
       }
     }

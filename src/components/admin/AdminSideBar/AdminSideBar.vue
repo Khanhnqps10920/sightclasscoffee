@@ -3,27 +3,8 @@
     <ul class="ad-sidebar__menu">
       <li class="ad-sidebar__menu-item">
         <router-link to="/">
-          <b-icon-clipboard-data></b-icon-clipboard-data>Dashboard
-        </router-link>
-      </li>
-      <li class="ad-sidebar__menu-item">
-        <router-link to="/">
-          <b-icon-clipboard-data></b-icon-clipboard-data>Dashboard
-        </router-link>
-      </li>
-      <li class="ad-sidebar__menu-item">
-        <router-link to="/">
-          <b-icon-clipboard-data></b-icon-clipboard-data>Dashboard
-        </router-link>
-      </li>
-      <li class="ad-sidebar__menu-item">
-        <router-link to="/">
-          <b-icon-clipboard-data></b-icon-clipboard-data>Dashboard
-        </router-link>
-      </li>
-      <li class="ad-sidebar__menu-item">
-        <router-link to="/">
-          <b-icon-clipboard-data></b-icon-clipboard-data>Dashboard
+          <b-icon-clipboard-data></b-icon-clipboard-data>
+          <span>Dashboard</span>
         </router-link>
       </li>
     </ul>
@@ -31,7 +12,12 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState("navbar", ["adminSidebarActive"])
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -49,9 +35,13 @@ export default {};
       transition: 0.4s ease;
 
       a {
+        display: inline-block;
         color: rgb(191, 203, 217);
         svg {
           margin-right: 1rem;
+        }
+        span {
+          transition: 1s ease;
         }
       }
 

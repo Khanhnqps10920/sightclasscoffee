@@ -1,10 +1,11 @@
 <template>
   <div class="admin admin-wrapper">
-    <div class="admin__sidebar-container">
+    <div class="admin__sidebar-container" :class="{active: !adminSidebarActive}">
       <AdminSideBar />
     </div>
 
-    <div class="admin__main-container">
+    <div class="admin__main-container" :class="{active: !adminSidebarActive}">
+      <AdminNavbar />
       <h1>test</h1>
     </div>
   </div>
@@ -13,10 +14,19 @@
 <script>
 // components
 import AdminSideBar from "../../components/admin/AdminSideBar/AdminSideBar.vue";
+import AdminNavbar from "../../components/admin/AdminNavbar/AdminNavbar.vue";
+
+// libs
+import { mapState } from "vuex";
 
 export default {
+  computed: {
+    ...mapState("navbar", ["adminSidebarActive"])
+  },
+
   components: {
-    AdminSideBar
+    AdminSideBar,
+    AdminNavbar
   }
 };
 </script>
@@ -53,6 +63,29 @@ export default {
     top: 0;
     left: 0;
     bottom: 0;
+    // transition: width 0.1s ease;
+
+    &.active {
+      width: 5.4rem !important;
+
+      &.active span {
+        height: 0;
+        width: 0;
+        display: inline-block;
+        overflow: hidden;
+        visibility: hidden;
+      }
+    }
+  }
+
+  &__main-container {
+    min-height: 100%;
+    position: relative;
+    margin-left: 21rem;
+
+    &.active {
+      margin-left: 5.4rem !important;
+    }
   }
 }
 </style>
