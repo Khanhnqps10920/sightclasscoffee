@@ -1,12 +1,15 @@
 <template>
   <div class="admin admin-wrapper">
-    <div class="admin__sidebar-container" :class="{active: !adminSidebarActive}">
+    <div class="admin__sidebar-container" :class="{ active: !adminSidebarActive }">
       <AdminSideBar />
     </div>
 
-    <div class="admin__main-container" :class="{active: !adminSidebarActive}">
+    <div class="admin__main-container" :class="{ active: !adminSidebarActive }">
       <AdminNavbar />
-      <h1>test</h1>
+
+      <div class="admin__main-container-content">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -43,8 +46,72 @@ export default {
   h6,
   a,
   p,
-  span {
+  span,
+  div {
     font-family: "Quicksand", sans-serif;
+    font-size: 1.6rem;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+    color: $base-color;
+    font-weight: 900;
+    margin-bottom: 2rem;
+  }
+
+  .admin-form {
+    &__control {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2.2rem;
+
+      label {
+        line-height: 4rem;
+        width: 12rem;
+        color: #606266;
+        padding-right: 1.2rem;
+        font-size: 1.4rem;
+        text-align: right;
+      }
+
+      input {
+        background-color: $white-color;
+        background-image: none;
+        border-radius: 0.4rem;
+        border: 0.1rem solid #dcdfe6;
+        color: #606266;
+        display: inline-block;
+        font-size: inherit;
+        height: 4rem;
+        line-height: 4rem;
+        outline: 0;
+        padding: 0 1.5rem;
+        width: calc(100% - 120px);
+
+        transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+      }
+
+      input:focus,
+      input:active {
+        border-color: $base-color;
+      }
+    }
+
+    button {
+      margin-left: 120px;
+      outline: none;
+      color: $white-color;
+      background: $base-color;
+      padding: 1.2rem 2rem;
+      font-size: 1.4rem;
+      border-radius: 0.4rem;
+      border: none;
+      transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1) ease;
+
+      &:hover {
+        background: $second-color;
+      }
+    }
   }
 
   .admin-wrapper {
@@ -63,7 +130,7 @@ export default {
     top: 0;
     left: 0;
     bottom: 0;
-    // transition: width 0.1s ease;
+    transition: width 0.1s ease;
 
     &.active {
       width: 5.4rem !important;
@@ -85,6 +152,10 @@ export default {
 
     &.active {
       margin-left: 5.4rem !important;
+    }
+
+    &-content {
+      padding: 20px;
     }
   }
 }

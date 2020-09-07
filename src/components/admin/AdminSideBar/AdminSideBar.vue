@@ -7,6 +7,18 @@
           <span>Dashboard</span>
         </router-link>
       </li>
+      <li class="ad-sidebar__menu-item">
+        <router-link to="/add-category">
+          <b-icon-card-text></b-icon-card-text>
+          <span>Category</span>
+        </router-link>
+      </li>
+      <li class="ad-sidebar__menu-item">
+        <router-link to="/add-product">
+          <b-icon-cup></b-icon-cup>
+          <span>Product</span>
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -28,6 +40,8 @@ export default {
   overflow: hidden;
 
   &__menu {
+    width: 21rem !important;
+
     width: 100%;
 
     li {
@@ -39,6 +53,7 @@ export default {
         color: rgb(191, 203, 217);
         svg {
           margin-right: 1rem;
+          transition: 1s ease;
         }
         span {
           transition: 1s ease;

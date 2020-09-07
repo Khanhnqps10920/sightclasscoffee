@@ -69,7 +69,25 @@ const routes = [
     component: () => import("../views/admin/Admin.vue"),
     meta: {
       isAdmin: true
-    }
+    },
+    children: [
+      {
+        path: "add-product",
+        name: "AddProduct",
+        component: () => import("../views/admin/AddProduct/AddProduct.vue"),
+        meta: {
+          isAdmin: true
+        }
+      },
+      {
+        path: "add-category",
+        name: "AddProduct",
+        component: () => import("../views/admin/AddCategory/AddCategory.vue"),
+        meta: {
+          isAdmin: true
+        }
+      }
+    ]
   }
 
 
