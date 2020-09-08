@@ -4,8 +4,7 @@ import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     name: "Home",
     component: Home,
@@ -20,7 +19,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+      import( /* webpackChunkName: "about" */ "../views/About.vue"),
     meta: {
       scrollToTop: true
     }
@@ -33,8 +32,7 @@ const routes = [
     meta: {
       scrollToTop: true
     },
-    children: [
-      {
+    children: [{
         path: "/",
         name: "collections",
         component: () => import("../components/Shop/Collections.vue")
@@ -70,8 +68,7 @@ const routes = [
     meta: {
       isAdmin: true
     },
-    children: [
-      {
+    children: [{
         path: "add-product",
         name: "AddProduct",
         component: () => import("../views/admin/AddProduct/AddProduct.vue"),
@@ -81,7 +78,7 @@ const routes = [
       },
       {
         path: "add-category",
-        name: "AddProduct",
+        name: "AddCategory",
         component: () => import("../views/admin/AddCategory/AddCategory.vue"),
         meta: {
           isAdmin: true
@@ -102,7 +99,10 @@ const router = new VueRouter({
     if (savedPosition) return savedPosition;
 
     if (to.matched.some(m => m.meta.scrollToTop)) {
-      return { x: 0, y: 0 };
+      return {
+        x: 0,
+        y: 0
+      };
     }
   },
 

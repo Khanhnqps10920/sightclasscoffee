@@ -2,19 +2,19 @@
   <div class="ad-sidebar">
     <ul class="ad-sidebar__menu">
       <li class="ad-sidebar__menu-item">
-        <router-link to="/">
+        <router-link to="/admin">
           <b-icon-clipboard-data></b-icon-clipboard-data>
           <span>Dashboard</span>
         </router-link>
       </li>
       <li class="ad-sidebar__menu-item">
-        <router-link to="/add-category">
+        <router-link :to="{ name: 'AddCategory' }">
           <b-icon-card-text></b-icon-card-text>
           <span>Category</span>
         </router-link>
       </li>
       <li class="ad-sidebar__menu-item">
-        <router-link to="/add-product">
+        <router-link :to="{ name: 'AddProduct' }">
           <b-icon-cup></b-icon-cup>
           <span>Product</span>
         </router-link>
@@ -27,8 +27,8 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState("navbar", ["adminSidebarActive"])
-  }
+    ...mapState("navbar", ["adminSidebarActive"]),
+  },
 };
 </script>
 
