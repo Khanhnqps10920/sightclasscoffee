@@ -1,9 +1,6 @@
 <template>
   <div class="admin admin-wrapper">
-    <div
-      class="admin__sidebar-container"
-      :class="{ active: !adminSidebarActive }"
-    >
+    <div class="admin__sidebar-container" :class="{ active: !adminSidebarActive }">
       <AdminSideBar />
     </div>
 
@@ -27,13 +24,13 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState("navbar", ["adminSidebarActive"]),
+    ...mapState("navbar", ["adminSidebarActive"])
   },
 
   components: {
     AdminSideBar,
-    AdminNavbar,
-  },
+    AdminNavbar
+  }
 };
 </script>
 

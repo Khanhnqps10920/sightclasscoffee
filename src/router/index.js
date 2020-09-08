@@ -69,6 +69,15 @@ const routes = [{
       isAdmin: true
     },
     children: [{
+        path: "/",
+        name: "DashBoard",
+        component: () => import("../views/admin/DashBoard/DashBoard.vue"),
+        meta: {
+          isAdmin: true
+        }
+      },
+
+      {
         path: "add-product",
         name: "AddProduct",
         component: () => import("../views/admin/AddProduct/AddProduct.vue"),
