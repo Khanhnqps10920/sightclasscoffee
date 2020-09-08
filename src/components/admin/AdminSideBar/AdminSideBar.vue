@@ -7,16 +7,25 @@
           <span>Dashboard</span>
         </router-link>
       </li>
+
       <li class="ad-sidebar__menu-item">
         <router-link to="/add-category">
           <b-icon-card-text></b-icon-card-text>
           <span>Category</span>
         </router-link>
       </li>
+
       <li class="ad-sidebar__menu-item">
         <router-link to="/add-product">
           <b-icon-cup></b-icon-cup>
           <span>Product</span>
+        </router-link>
+      </li>
+
+      <li class="ad-sidebar__menu-item">
+        <router-link to="/add-product">
+          <b-icon-cart></b-icon-cart>
+          <span>Orders</span>
         </router-link>
       </li>
     </ul>
