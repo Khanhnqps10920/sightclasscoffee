@@ -92,6 +92,14 @@ const routes = [{
         meta: {
           isAdmin: true
         }
+      },
+      {
+        path: "add-coffee-category",
+        name: "AddCoffeeCategory",
+        component: () => import("../views/admin/AddCoffeeCategory/AddCoffeeCategory.vue"),
+        meta: {
+          isAdmin: true
+        }
       }
     ]
   }

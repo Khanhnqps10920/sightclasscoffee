@@ -1,11 +1,19 @@
 <template>
   <div class="add-product">
     <h1 class="page-title">Add Product</h1>
+
+    <AddProductForm />
   </div>
 </template>
 
 <script>
-export default {};
+import AddProductForm from "../../../components/admin/AdminForm/AddProductForm.vue";
+
+export default {
+  components: {
+    AddProductForm
+  }
+};
 </script>
 
 <style>

@@ -16,6 +16,13 @@
       </li>
 
       <li class="ad-sidebar__menu-item">
+        <router-link :to="{ name: 'AddCoffeeCategory' }">
+          <b-icon-cup></b-icon-cup>
+          <span>Coffee Category</span>
+        </router-link>
+      </li>
+
+      <li class="ad-sidebar__menu-item">
         <router-link :to="{ name: 'AddProduct' }">
           <b-icon-cup></b-icon-cup>
           <span>Product</span>
@@ -36,8 +43,8 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState("navbar", ["adminSidebarActive"]),
-  },
+    ...mapState("navbar", ["adminSidebarActive"])
+  }
 };
 </script>
 
