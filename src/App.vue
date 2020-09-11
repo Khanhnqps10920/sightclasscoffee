@@ -22,7 +22,7 @@ import SideBar from "./components/CartSideBar/CartSideBar";
 import Footer from "./components/Footer/Footer.vue";
 
 // libs
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
   components: {
@@ -46,6 +46,7 @@ export default {
   // methods
   methods: {
     ...mapMutations("navbar", ["handleNavbarActive"]),
+    ...mapActions("apis", ["getCategories"]),
     // navbar scroll
     handleScroll() {
       if (window.pageYOffset > 80) {
@@ -63,6 +64,8 @@ export default {
 
   created() {
     window.addEventListener("scroll", this.handleScroll);
+
+    this.getCategories();
   },
 
   destroyed() {

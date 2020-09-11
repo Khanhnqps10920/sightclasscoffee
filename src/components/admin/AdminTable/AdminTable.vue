@@ -1,6 +1,6 @@
 <template>
   <div class="admin-table">
-    <h1 class="page-title">Category</h1>
+    <h1 class="page-title">{{ title }}</h1>
 
     <b-table hover bordered :items="items" class="admin-table"></b-table>
   </div>
@@ -13,13 +13,17 @@ export default {
       type: Array,
       default: () => {
         return [];
-      },
+      }
     },
+    title: {
+      type: String,
+      required: true
+    }
   },
 
   data() {
     return {};
-  },
+  }
 };
 </script>
 
