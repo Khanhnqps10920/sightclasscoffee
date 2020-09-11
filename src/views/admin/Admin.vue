@@ -1,6 +1,9 @@
 <template>
   <div class="admin admin-wrapper">
-    <div class="admin__sidebar-container" :class="{ active: !adminSidebarActive }">
+    <div
+      class="admin__sidebar-container"
+      :class="{ active: !adminSidebarActive }"
+    >
       <AdminSideBar />
     </div>
 
@@ -15,6 +18,7 @@
 </template>
 
 <script>
+// db
 // components
 import AdminSideBar from "../../components/admin/AdminSideBar/AdminSideBar.vue";
 import AdminNavbar from "../../components/admin/AdminNavbar/AdminNavbar.vue";
@@ -24,13 +28,13 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState("navbar", ["adminSidebarActive"])
+    ...mapState("navbar", ["adminSidebarActive"]),
   },
 
   components: {
     AdminSideBar,
-    AdminNavbar
-  }
+    AdminNavbar,
+  },
 };
 </script>
 
@@ -74,7 +78,9 @@ export default {
         text-align: left;
       }
 
-      input {
+      input,
+      textarea,
+      select {
         background-color: $white-color;
         background-image: none;
         border-radius: 0.4rem;
@@ -91,14 +97,28 @@ export default {
         transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
       }
 
+      select {
+        width: 50%;
+      }
+
+      textarea {
+        height: 10rem;
+      }
+
       input:focus,
-      input:active {
+      textarea:focus,
+      select:focus,
+      input:active,
+      textarea:active,
+      select:active {
         border-color: $base-color;
+        box-shadow: none;
       }
     }
 
     &__file {
       display: flex;
+      margin-bottom: 2.2rem;
 
       &-label {
         line-height: 4rem;

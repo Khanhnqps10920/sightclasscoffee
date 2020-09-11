@@ -27,14 +27,14 @@
                   <strong>$108.00</strong>
                 </p>
               </div>
-              <div class="product__information--price-size">
+              <!-- <div class="product__information--price-size">
                 <b-form-group label="SIZE">
                   <b-form-select v-model="selected">
                     <b-form-select-option :value="null">5oz</b-form-select-option>
                     <b-form-select-option value="a">Option A</b-form-select-option>
                   </b-form-select>
                 </b-form-group>
-              </div>
+              </div>-->
             </div>
 
             <div class="product__information--add d-flex justify-content-center align-items-center">
