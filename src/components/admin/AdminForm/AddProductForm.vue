@@ -1,5 +1,5 @@
 <template>
-  <form class="admin-form">
+  <form @submit.prevent="handleAddProduct" class="admin-form">
     <div class="admin-form__control">
       <label for="name" class="admin-form__control-label">Product Name</label>
 
@@ -39,19 +39,15 @@
     <div class="admin-form__control" v-if="isCoffee">
       <label for="category">Coffee Category</label>
 
-      <b-form-select :options="coffeeCategoryOptions" v-model="product.coffeeCategories"></b-form-select>
+      <b-form-select :options="coffeeCategoryOptions" v-model="coffeeCat"></b-form-select>
     </div>
 
-    <div class="admin-form__control" v-for="(ingredient,index) in ingredients" :key="index">
-      <label for="ingredient" class="admin-form__control-label">Ingredient</label>
+    <div v-if="isCoffee">
+      <div class="admin-form__control" v-for="(ingredient,index) in ingredients" :key="index">
+        <label for="ingredient" class="admin-form__control-label">Ingredient</label>
 
-      <input
-        type="text"
-        name="ingredient"
-        @keyup.tab.prevent="handleAddIngredient"
-        class="small"
-        placeholder="tab to add ingredient"
-      />
+        <input type="text" class="small" v-model=" ingredients[index]" />
+      </div>
     </div>
 
     <div class="admin-form__control" v-if="isCoffee">
@@ -72,8 +68,9 @@
       <!-- Styled -->
       <b-form-file
         class="admin-form__file-inputs"
-        v-model="product.file"
-        :state="Boolean(product.file)"
+        accept="image/*"
+        v-model="file"
+        :state="Boolean(file)"
         placeholder="Choose a file or drop it here..."
         drop-placeholder="Drop file here..."
       ></b-form-file>
@@ -86,6 +83,7 @@
 
 <script>
 // libs
+import firebase from "firebase";
 import { mapState } from "vuex";
 
 export default {
@@ -118,6 +116,8 @@ export default {
 
   watch: {
     "product.categories": function(val) {
+      if (!val) return;
+
       const categoryIndex = this.categories.findIndex(
         category => category.id === val
       );
@@ -133,14 +133,14 @@ export default {
       ingredients: [],
       otherIngredients: null,
       error: null,
+      coffeeCat: null,
+      file: null,
 
       product: {
         categories: null,
-        coffeeCategories: null,
         name: null,
         price: null,
-        description: null,
-        file: null
+        description: null
       },
       isCoffee: false
     };
@@ -148,7 +148,6 @@ export default {
 
   methods: {
     handleAddIngredient() {
-      console.log("1111");
       if (this.otherIngredients) {
         this.error = null;
         this.ingredients.push(this.otherIngredients);
@@ -156,7 +155,72 @@ export default {
       } else {
         this.error = "Ingredient cant be empty";
       }
+    },
+
+    testUpdate() {
+      firebase
+        .storage()
+        .ref(this.product.file.name)
+        .put(this.product.file)
+        .then(snapshot => {
+          console.log(snapshot, "success");
+        })
+        .catch(e => {
+          console.log(e);
+        });
+      console.log("test update");
+    },
+
+    handleAddProduct() {
+      const { categories, name, price, description } = this.product;
+      // check null
+      if (categories && name && price && description && this.file) {
+        // check if coffee
+        if (this.isCoffee) {
+          // check if coffee category not null
+          if (!this.coffeeCat) {
+            this.error =
+              "Field cant be empty and please make sure that u selected one categories";
+          } else {
+            this.error = null;
+            const newProduct = {
+              ...this.product,
+              ingredients: this.ingredients,
+              coffeeCategories: this.coffeeCat
+            };
+
+            console.log(newProduct);
+          }
+        }
+        // normal product
+        else {
+          this.error = null;
+          const newProduct = {
+            ...this.product
+          };
+
+          console.log(newProduct);
+        }
+
+        // if not coffee
+      } else {
+        this.error =
+          "Field cant be empty and please make sure that u selected one categories and have a product img";
+      }
     }
+  },
+
+  created() {
+    // const storageRef = firebase
+    //   .storage()
+    //   .ref()
+    //   .child("v.jpg");
+    // storageRef
+    //   .getDownloadURL()
+    //   .then(url => {
+    //     console.log(url, "url");
+    //   })
+    //   .catch(e => console.log(e));
   }
 };
 </script>
