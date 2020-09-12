@@ -87,9 +87,10 @@ export default new Vuex.Store({
 
         },
 
-        getCoffeeCategories: ({ commit }) => {
+        getCoffeeCategories: ({
+          commit
+        }) => {
           const categories = [];
-
           db.collection("coffee-categories").get().then(snapShot => {
             snapShot.forEach(doc => {
               const category = {

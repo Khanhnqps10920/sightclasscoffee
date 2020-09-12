@@ -46,7 +46,7 @@ export default {
   // methods
   methods: {
     ...mapMutations("navbar", ["handleNavbarActive"]),
-    ...mapActions("apis", ["getCategories"]),
+    ...mapActions("apis", ["getCategories", "getCoffeeCategories"]),
     // navbar scroll
     handleScroll() {
       if (window.pageYOffset > 80) {
@@ -66,6 +66,8 @@ export default {
     window.addEventListener("scroll", this.handleScroll);
 
     this.getCategories();
+
+    this.getCoffeeCategories();
   },
 
   destroyed() {
