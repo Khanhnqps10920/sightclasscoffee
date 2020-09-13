@@ -2,7 +2,7 @@
   <div class="admin-table">
     <h1 class="page-title">{{ title }}</h1>
 
-    <b-table hover bordered :items="items" class="admin-table"></b-table>
+    <b-table hover bordered :items="itemsFilter" class="admin-table"></b-table>
   </div>
 </template>
 
@@ -23,6 +23,27 @@ export default {
 
   data() {
     return {};
+  },
+
+  computed: {
+    itemsFilter() {
+      return this.items.map(item => {
+        for (const key in item) {
+          if (typeof item[key] === "string") {
+            item[key] =
+              item[key].length > 50
+                ? item[key].substr(0, 50) + "..."
+                : item[key];
+          }
+
+          if (typeof item[key] === "object") {
+            item[key] = item[key].join();
+          }
+        }
+
+        return item;
+      });
+    }
   }
 };
 </script>

@@ -3,6 +3,8 @@
     <AdminTable title="Categories" :items="categories" />
 
     <AdminTable title="Coffee Categories" :items="coffeeCategories" />
+
+    <AdminTable title="Products" :items="products" />
   </div>
 </template>
 
@@ -14,11 +16,15 @@ import AdminTable from "../../../components/admin/AdminTable/AdminTable.vue";
 
 export default {
   computed: {
-    ...mapState("apis", ["categories", "coffeeCategories"])
+    ...mapState("apis", ["categories", "coffeeCategories", "products"])
   },
 
   methods: {
-    ...mapActions("apis", ["getCategories", "getCoffeeCategories"])
+    ...mapActions("apis", [
+      "getCategories",
+      "getCoffeeCategories",
+      "getProducts"
+    ])
   },
 
   components: {
@@ -28,6 +34,7 @@ export default {
   created() {
     this.getCategories();
     this.getCoffeeCategories();
+    this.getProducts();
   }
 };
 </script>

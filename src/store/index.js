@@ -50,7 +50,8 @@ export default new Vuex.Store({
 
       state: () => ({
         categories: [],
-        coffeeCategories: []
+        coffeeCategories: [],
+        products: []
       }),
 
       mutations: {
@@ -60,6 +61,10 @@ export default new Vuex.Store({
 
         FETCH_COFFEE_CATE: (state, payload) => {
           state.coffeeCategories = payload;
+        },
+
+        FETCH_PRODUCTS: (state, payload) => {
+          state.products = payload;
         }
       },
 
@@ -106,6 +111,22 @@ export default new Vuex.Store({
           }).catch(e => {
             console.log(e)
           })
+        },
+
+        getProducts: ({ commit }) => {
+          const products = [];
+          db.collection("products").get().then(snapShot => {
+            snapShot.forEach(doc => {
+              const product = {
+                id: doc.id,
+                ...doc.data()
+              }
+
+              products.push(product);
+            })
+
+            commit("FETCH_PRODUCTS", products);
+          }).catch(e => { console.log(e) })
         }
       }
     }

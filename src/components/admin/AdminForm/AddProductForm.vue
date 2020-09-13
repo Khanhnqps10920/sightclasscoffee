@@ -83,6 +83,7 @@
 
 <script>
 // libs
+import db from "../../../firebase/init";
 import firebase from "firebase";
 import { mapState } from "vuex";
 
@@ -137,8 +138,9 @@ export default {
       file: null,
 
       product: {
-        categories: null,
         name: null,
+
+        categories: null,
         price: null,
         description: null
       },
@@ -157,24 +159,12 @@ export default {
       }
     },
 
-    testUpdate() {
-      firebase
-        .storage()
-        .ref(this.product.file.name)
-        .put(this.product.file)
-        .then(snapshot => {
-          console.log(snapshot, "success");
-        })
-        .catch(e => {
-          console.log(e);
-        });
-      console.log("test update");
-    },
-
     handleAddProduct() {
       const { categories, name, price, description } = this.product;
       // check null
       if (categories && name && price && description && this.file) {
+        const storage = firebase.storage();
+
         // check if coffee
         if (this.isCoffee) {
           // check if coffee category not null
@@ -183,23 +173,66 @@ export default {
               "Field cant be empty and please make sure that u selected one categories";
           } else {
             this.error = null;
-            const newProduct = {
-              ...this.product,
-              ingredients: this.ingredients,
-              coffeeCategories: this.coffeeCat
-            };
+            // upload file
+            storage
+              .ref(this.file.name)
+              .put(this.file)
+              .then(() => {
+                console.log("upload success");
 
-            console.log(newProduct);
+                // download file url
+                storage
+                  .ref()
+                  .child(this.file.name)
+                  .getDownloadURL()
+                  .then(url => {
+                    const newProduct = {
+                      ...this.product,
+                      ingredients: this.ingredients,
+                      coffeeCategories: this.coffeeCat,
+                      imgUrl: url
+                    };
+
+                    db.collection("products")
+                      .add(newProduct)
+                      .then(() => {
+                        this.$router.push({ name: "DashBoard" });
+                      });
+                  });
+              })
+              .catch(e => console.log(e));
           }
         }
         // normal product
         else {
           this.error = null;
-          const newProduct = {
-            ...this.product
-          };
 
-          console.log(newProduct);
+          storage
+            .ref(this.file.name)
+            .put(this.file)
+            .then(() => {
+              console.log("upload success");
+
+              // download file url
+              storage
+                .ref()
+                .child(this.file.name)
+                .getDownloadURL()
+                .then(url => {
+                  const newProduct = {
+                    ...this.product,
+
+                    imgUrl: url
+                  };
+
+                  db.collection("products")
+                    .add(newProduct)
+                    .then(() => {
+                      this.$router.push({ name: "DashBoard" });
+                    });
+                });
+            })
+            .catch(e => console.log(e));
         }
 
         // if not coffee
