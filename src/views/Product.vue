@@ -4,18 +4,18 @@
       <b-row>
         <b-col class="product__left-side" sm="6">
           <div class="product__inner">
-            <img src="@/assets/images/product.webp" alt="product-img" />
+            <img :src="item.imgUrl" alt="product-img" />
           </div>
         </b-col>
         <b-col class="product__right-side" sm="6">
           <div class="product__information">
-            <p class="product__information--type">EXPRESSO</p>
-            <h1 class="product__information--name">Owl's Howl</h1>
+            <p
+              class="product__information--type"
+            >{{ category ? category.name.toUpperCase() : 'Expresso' }}</p>
+            <h1 class="product__information--name">{{ item.name }}</h1>
 
             <div class="product__information--material">
-              <span>Cacao,</span>
-              <span>Stone Fruit,</span>
-              <span>Candie Orange Peel</span>
+              <span>{{ item.ingredients ? item.ingredients.join() : '' }}</span>
             </div>
 
             <div
@@ -24,7 +24,7 @@
               <div class="product__information--price-onet">
                 <p>
                   One Time:
-                  <strong>$108.00</strong>
+                  <strong>${{ item.price }}</strong>
                 </p>
               </div>
               <!-- <div class="product__information--price-size">
@@ -48,8 +48,7 @@
 
             <div class="product__information--detail">
               <h2>Coffee Detail</h2>
-              <p>While components and flavors change seasonally, our flagship Owl’s Howl Espresso invariably delivers a balanced, and refined espresso experience. We rotate the components that comprise this blend throughout the year to ensure optimal freshness, giving us the opportunity to showcase beautiful coffees that pair well together.</p>
-              <p>Placing a bulk order? See our FAQ page for more details.</p>
+              <p>{{ item.description}}</p>
             </div>
           </div>
         </b-col>
@@ -58,7 +57,7 @@
     <section class="product__arrival">
       <h3 class="text-center">RECENT ARRIVALS</h3>
       <b-container fluid>
-        <b-row>
+        <!-- <b-row>
           <b-col cols="12" sm="12" md="6" lg="4">
             <ShopItem :whiteMode="true" />
           </b-col>
@@ -71,15 +70,16 @@
           <b-col cols="12" sm="12" md="6" lg="4">
             <ShopItem :whiteMode="true" />
           </b-col>
-        </b-row>
+        </b-row>-->
       </b-container>
     </section>
   </div>
 </template>
 
 <script>
+import db from "@/firebase/init.js";
 // import NavbarInside from "../components/Navbar/NavbarInside.vue";
-import ShopItem from "../components/Shop/ShopItem.vue";
+// import ShopItem from "../components/Shop/ShopItem.vue";
 
 // libs
 import { mapState } from "vuex";
@@ -87,16 +87,41 @@ import { mapState } from "vuex";
 export default {
   components: {
     // NavbarInside
-    ShopItem
+    // ShopItem
   },
   computed: {
-    ...mapState("navbar", ["navbarActive"])
+    ...mapState("apis", ["coffeeCategories"]),
+    ...mapState("navbar", ["navbarActive"]),
+
+    category() {
+      return this.item && this.coffeeCategories
+        ? this.coffeeCategories.find(
+            item => (item.id = this.item.coffeeCategories)
+          )
+        : null;
+    }
   },
 
   data() {
     return {
-      selected: null
+      selected: null,
+      item: {}
     };
+  },
+
+  created() {
+    db.collection("products")
+      .doc(this.$route.params.slug)
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          console.log(doc.data());
+          this.item = { ...doc.data() };
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 };
 </script>

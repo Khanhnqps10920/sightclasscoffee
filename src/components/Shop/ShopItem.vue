@@ -1,12 +1,16 @@
 <template>
-  <div class="shop-item" :class="{ white: whiteMode }">
+  <div
+    class="shop-item"
+    :class="{ white: whiteMode }"
+    @click="$router.push({name: 'product', params: {slug: item.id}})"
+  >
     <b-link class="shop-item__item-image">
-      <img class="img-fluid" src="@/assets/images/product.webp" alt="product-img" />
+      <img class="img-fluid" :src="item.imgUrl" alt="product-img" />
     </b-link>
     <div class="shop-item__description text-center">
-      <p class="shop-item__description-category">Espresso</p>
-      <h3 class="shop-item__description-name">Owl' Howl</h3>
-      <p class="shop-item__description-price">$18.00</p>
+      <p class="shop-item__description-category">{{ category }}</p>
+      <h3 class="shop-item__description-name">{{ item.name.substr(0,23) }}</h3>
+      <p class="shop-item__description-price">${{ item.price }}</p>
     </div>
 
     <button class="btn-add shop-item__item-btn d-block mx-auto">Add to Bag</button>
@@ -14,11 +18,34 @@
 </template>
 
 <script>
+// libs
+import { mapState } from "vuex";
+
 export default {
   props: {
     whiteMode: {
       type: Boolean,
       default: false
+    },
+    item: {
+      type: Object,
+      required: true
+    }
+  },
+
+  computed: {
+    ...mapState("apis", ["coffeeCategories"]),
+
+    category() {
+      if (this.item) {
+        const category = this.coffeeCategories.find(
+          category => category.id === this.item.coffeeCategories
+        );
+
+        return category.name;
+      }
+
+      return "";
     }
   }
 };

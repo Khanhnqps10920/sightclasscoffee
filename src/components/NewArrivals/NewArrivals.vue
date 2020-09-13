@@ -1,7 +1,7 @@
 <template>
   <div class="new-arrival">
     <b-row>
-      <b-col cols="12" sm="12" md="6" lg="4" xl="4">
+      <!-- <b-col cols="12" sm="12" md="6" lg="4" xl="4">
         <ShopItem />
       </b-col>
       <b-col cols="12" sm="12" md="6" lg="4" xl="4">
@@ -15,9 +15,17 @@
       </b-col>
       <b-col cols="12" sm="12" md="6" lg="4" xl="4">
         <ShopItem />
-      </b-col>
-      <b-col cols="12" sm="12" md="6" lg="4" xl="4">
-        <ShopItem />
+      </b-col>-->
+      <b-col
+        cols="12"
+        sm="12"
+        md="6"
+        lg="4"
+        xl="4"
+        v-for="product in newArrivals"
+        :key="product.id"
+      >
+        <ShopItem :item="product" />
       </b-col>
 
       <b-link class="new-arrival__visit text-center" to="/collection">Visit The Shop</b-link>
@@ -26,12 +34,24 @@
 </template>
 
 <script>
+// libs
+import { mapState } from "vuex";
+
 // components
 import ShopItem from "../Shop/ShopItem.vue";
 
 export default {
   components: {
     ShopItem
+  },
+  computed: {
+    ...mapState("apis", ["products"]),
+
+    newArrivals() {
+      let newArrivals = this.products ? [...this.products].splice(0, 6) : [];
+
+      return newArrivals;
+    }
   }
 };
 </script>

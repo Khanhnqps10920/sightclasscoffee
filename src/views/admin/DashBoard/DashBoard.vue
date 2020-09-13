@@ -10,7 +10,7 @@
 
 <script>
 // libs
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 
 import AdminTable from "../../../components/admin/AdminTable/AdminTable.vue";
 
@@ -19,23 +19,13 @@ export default {
     ...mapState("apis", ["categories", "coffeeCategories", "products"])
   },
 
-  methods: {
-    ...mapActions("apis", [
-      "getCategories",
-      "getCoffeeCategories",
-      "getProducts"
-    ])
-  },
+  methods: {},
 
   components: {
     AdminTable
   },
 
-  created() {
-    this.getCategories();
-    this.getCoffeeCategories();
-    this.getProducts();
-  }
+  created() {}
 };
 </script>
 

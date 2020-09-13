@@ -1,7 +1,7 @@
 <template>
   <div class="collections">
     <b-container fluid>
-      <CategorySection :id="'firstSection'" />
+      <CategorySection :id="'firstSection'" title="Coffee" :items="[...products].splice(0,6)" />
 
       <section class="collections__subcribe">
         <b-row>
@@ -28,9 +28,14 @@
         </b-row>
       </section>
 
-      <CategorySection :id="'secondSection'" :whiteMode="true" />
+      <CategorySection
+        :id="'secondSection'"
+        :whiteMode="true"
+        :items="products"
+        title="Brewing tools"
+      />
 
-      <CategorySection :id="'thirdSection'" />
+      <CategorySection :id="'thirdSection'" title="goods" :items="products" />
     </b-container>
 
     <!-- subcribe sectio  -->
@@ -38,10 +43,15 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 import CategorySection from "../Section/CategorySection.vue";
 export default {
   components: {
     CategorySection
+  },
+  computed: {
+    ...mapState("apis", ["products"])
   }
 };
 </script>
