@@ -8,7 +8,7 @@
       <img class="img-fluid" :src="item.imgUrl" alt="product-img" />
     </b-link>
     <div class="shop-item__description text-center">
-      <p class="shop-item__description-category">{{ category }}</p>
+      <p class="shop-item__description-category">{{ getCategory(item.coffeeCategories).name }}</p>
       <h3 class="shop-item__description-name">{{ item.name.substr(0,23) }}</h3>
       <p class="shop-item__description-price">${{ item.price }}</p>
     </div>
@@ -19,7 +19,7 @@
 
 <script>
 // libs
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   props: {
@@ -34,19 +34,7 @@ export default {
   },
 
   computed: {
-    ...mapState("apis", ["coffeeCategories"]),
-
-    category() {
-      if (this.item) {
-        const category = this.coffeeCategories.find(
-          category => category.id === this.item.coffeeCategories
-        );
-
-        return category.name;
-      }
-
-      return "";
-    }
+    ...mapGetters("apis", ["getCategory"])
   }
 };
 </script>

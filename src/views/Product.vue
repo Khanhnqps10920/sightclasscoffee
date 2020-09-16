@@ -11,7 +11,7 @@
           <div class="product__information">
             <p
               class="product__information--type"
-            >{{ category ? category.name.toUpperCase() : 'Expresso' }}</p>
+            >{{ getCategory(item.coffeeCategories).name.toUpperCase() }}</p>
             <h1 class="product__information--name">{{ item.name }}</h1>
 
             <div class="product__information--material">
@@ -82,7 +82,7 @@ import db from "@/firebase/init.js";
 // import ShopItem from "../components/Shop/ShopItem.vue";
 
 // libs
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   components: {
@@ -90,16 +90,8 @@ export default {
     // ShopItem
   },
   computed: {
-    ...mapState("apis", ["coffeeCategories"]),
     ...mapState("navbar", ["navbarActive"]),
-
-    category() {
-      return this.item && this.coffeeCategories
-        ? this.coffeeCategories.find(
-            item => (item.id = this.item.coffeeCategories)
-          )
-        : null;
-    }
+    ...mapGetters("apis", ["getCategory"])
   },
 
   data() {

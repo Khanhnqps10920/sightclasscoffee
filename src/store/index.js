@@ -54,6 +54,12 @@ export default new Vuex.Store({
         products: []
       }),
 
+      getters: {
+        getCategory: (state) => (categoryId) => {
+          return state.coffeeCategories.find(category => category.id === categoryId)
+        }
+      },
+
       mutations: {
         FETCH_CATEGORIES: (state, payload) => {
           state.categories = payload;
@@ -113,7 +119,9 @@ export default new Vuex.Store({
           })
         },
 
-        getProducts: ({ commit }) => {
+        getProducts: ({
+          commit
+        }) => {
           const products = [];
           db.collection("products").get().then(snapShot => {
             snapShot.forEach(doc => {
@@ -126,7 +134,9 @@ export default new Vuex.Store({
             })
 
             commit("FETCH_PRODUCTS", products);
-          }).catch(e => { console.log(e) })
+          }).catch(e => {
+            console.log(e)
+          })
         }
       }
     }

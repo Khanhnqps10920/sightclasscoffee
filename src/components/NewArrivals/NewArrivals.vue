@@ -49,7 +49,6 @@ export default {
 
     newArrivals() {
       let newArrivals = this.products ? [...this.products].splice(0, 6) : [];
-
       return newArrivals;
     }
   }
