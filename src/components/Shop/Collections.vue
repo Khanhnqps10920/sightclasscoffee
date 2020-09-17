@@ -1,7 +1,11 @@
 <template>
   <div class="collections">
     <b-container fluid>
-      <CategorySection :id="'firstSection'" title="Coffee" :items="[...products].splice(0,6)" />
+      <CategorySection
+        :id="categories[0].id"
+        :title="categories[0].name"
+        :items="getProductsByCategory(categories[0].id).splice(0,6)"
+      />
 
       <section class="collections__subcribe">
         <b-row>
@@ -28,14 +32,35 @@
         </b-row>
       </section>
 
-      <CategorySection
-        :id="'secondSection'"
+      <!-- <CategorySection
+        :id="'brewing tools'"
         :whiteMode="true"
         :items="products"
         title="Brewing tools"
-      />
+      />-->
 
-      <CategorySection :id="'thirdSection'" title="goods" :items="products" />
+      <!-- <CategorySection
+        :id="categories[1].id"
+        :title="categories[1].name"
+        :items="getProductsByCategory(categories[1].id).splice(0,6)"
+      />-->
+
+      <CategorySection
+        v-for="(category,index) in categoriesFilter"
+        :key="category.id"
+        :id="category.id"
+        :title="category.name"
+        ::whiteMode=" index % 2  === 0"
+        :items="getProductsByCategory(category.id).splice(0,6)"
+      />
+      <!-- 
+      <CategorySection
+        :id="categories[2].id"
+        :title="categories[2].name"
+        :items="getProductsByCategory(categories[2].id).splice(0,6)"
+      />-->
+
+      <!-- <CategorySection :id="'thirdSection'" title="goods" :items="products" /> -->
     </b-container>
 
     <!-- subcribe sectio  -->
@@ -43,7 +68,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 import CategorySection from "../Section/CategorySection.vue";
 export default {
@@ -51,7 +76,12 @@ export default {
     CategorySection
   },
   computed: {
-    ...mapState("apis", ["products"])
+    ...mapState("apis", ["products", "categories"]),
+    ...mapGetters("apis", ["getProductsByCategory"]),
+
+    categoriesFilter() {
+      return [...this.categories].splice(1, this.categories.length);
+    }
   }
 };
 </script>

@@ -57,6 +57,10 @@ export default new Vuex.Store({
       getters: {
         getCategory: (state) => (categoryId) => {
           return state.coffeeCategories.find(category => category.id === categoryId)
+        },
+
+        getProductsByCategory: (state) => (categoryId) => {
+          return state.products.filter(product => product.categories === categoryId)
         }
       },
 
