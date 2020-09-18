@@ -46,12 +46,12 @@
       />-->
 
       <CategorySection
-        v-for="(category,index) in categoriesFilter"
+        v-for="(category, index) in categoriesFilter"
         :key="category.id"
         :id="category.id"
         :title="category.name"
-        ::whiteMode=" index % 2  === 0"
-        :items="getProductsByCategory(category.id).splice(0,6)"
+        :whiteMode="index % 2 === 0"
+        :items="getProductsByCategory(category.id).splice(0, 6)"
       />
       <!-- 
       <CategorySection

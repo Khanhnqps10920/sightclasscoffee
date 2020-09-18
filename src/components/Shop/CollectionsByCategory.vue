@@ -3,7 +3,7 @@
     <b-container fluid>
       <h2 class="collection-ctg__name text-center">Collection Name</h2>
       <b-row>
-        <b-col sm="3">
+        <!-- <b-col sm="3">
           <div
             v-b-toggle.filter-collapse
             class="collection-ctg__filter d-flex align-items-center justify-content-center"
@@ -20,27 +20,12 @@
               <li class="collection-ctg__filter-list--item">Test</li>
             </ul>
           </b-collapse>
-        </b-col>
+        </b-col>-->
 
-        <b-col sm="9">
+        <b-col sm="12" md="12" lg="12">
           <b-row>
-            <b-col sm="4">
-              <ShopItem />
-            </b-col>
-            <b-col sm="4">
-              <ShopItem />
-            </b-col>
-            <b-col sm="4">
-              <ShopItem />
-            </b-col>
-            <b-col sm="4">
-              <ShopItem />
-            </b-col>
-            <b-col sm="4">
-              <ShopItem />
-            </b-col>
-            <b-col sm="4">
-              <ShopItem />
+            <b-col sm="12" md="6" lg="3" v-for="product in products" :key="product.id">
+              <ShopItem :item="product" />
             </b-col>
           </b-row>
         </b-col>
@@ -50,12 +35,29 @@
 </template>
 
 <script>
+// lib
+import { mapGetters } from "vuex";
+
 // component
 import ShopItem from "./ShopItem.vue";
 
 export default {
   components: {
     ShopItem
+  },
+
+  computed: {
+    ...mapGetters("apis", ["getProductsByCategory"])
+  },
+
+  data() {
+    return {
+      products: []
+    };
+  },
+
+  created() {
+    this.products = this.getProductsByCategory(this.$route.params.category);
   }
 };
 </script>

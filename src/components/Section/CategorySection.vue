@@ -3,7 +3,7 @@
     <div class="category__info d-flex justify-content-between align-items-center">
       <h3 class="category__info-title">{{ title.toUpperCase() }}</h3>
 
-      <router-link class="category__info-link" to="/collection/ssss">Watch More</router-link>
+      <router-link class="category__info-link" :to="'/collection/'+items[0].categories">Watch More</router-link>
     </div>
     <b-row class="category__items">
       <b-col cols="12" sm="12" md="6" lg="4" v-for="item in items" :key="item.id">
