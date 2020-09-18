@@ -10,6 +10,7 @@
         <b-col class="product__right-side" sm="6">
           <div class="product__information">
             <p
+              v-if="item.coffeeCategories"
               class="product__information--type"
             >{{ getCategory(item.coffeeCategories).name.toUpperCase() }}</p>
             <h1 class="product__information--name">{{ item.name }}</h1>
@@ -49,6 +50,9 @@
             <div class="product__information--detail">
               <h2>Coffee Detail</h2>
               <p>{{ item.description}}</p>
+              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia praesentium ipsam, itaque modi rerum ipsa rem, facilis adipisci sint mollitia est sequi! Qui minus soluta dicta vel, illum alias laudantium voluptatem ratione modi quibusdam natus maxime. Illum magni, sunt quisquam repellendus nulla atque debitis mollitia! Tenetur aspernatur assumenda, similique nam libero, consequuntur, vero laborum rem cumque quis unde quia tempore?</p>
+              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia praesentium ipsam, itaque modi rerum ipsa rem, facilis adipisci sint mollitia est sequi! Qui minus soluta dicta vel, illum alias laudantium voluptatem ratione modi quibusdam natus maxime. Illum magni, sunt quisquam repellendus nulla atque debitis mollitia! Tenetur aspernatur assumenda, similique nam libero, consequuntur, vero laborum rem cumque quis unde quia tempore?</p>
+              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia praesentium ipsam, itaque modi rerum ipsa rem, facilis adipisci sint mollitia est sequi! Qui minus soluta dicta vel, illum alias laudantium voluptatem ratione modi quibusdam natus maxime. Illum magni, sunt quisquam repellendus nulla atque debitis mollitia! Tenetur aspernatur assumenda, similique nam libero, consequuntur, vero laborum rem cumque quis unde quia tempore?</p>
             </div>
           </div>
         </b-col>
@@ -57,20 +61,11 @@
     <section class="product__arrival">
       <h3 class="text-center">RECENT ARRIVALS</h3>
       <b-container fluid>
-        <!-- <b-row>
-          <b-col cols="12" sm="12" md="6" lg="4">
-            <ShopItem :whiteMode="true" />
+        <b-row>
+          <b-col cols="12" sm="12" md="6" lg="4" v-for="item in recents" :key="item.id">
+            <ShopItem :whiteMode="true" :item="item" />
           </b-col>
-          <b-col cols="12" sm="12" md="6" lg="4">
-            <ShopItem :whiteMode="true" />
-          </b-col>
-          <b-col cols="12" sm="12" md="6" lg="4">
-            <ShopItem :whiteMode="true" />
-          </b-col>
-          <b-col cols="12" sm="12" md="6" lg="4">
-            <ShopItem :whiteMode="true" />
-          </b-col>
-        </b-row>-->
+        </b-row>
       </b-container>
     </section>
   </div>
@@ -79,7 +74,7 @@
 <script>
 import db from "@/firebase/init.js";
 // import NavbarInside from "../components/Navbar/NavbarInside.vue";
-// import ShopItem from "../components/Shop/ShopItem.vue";
+import ShopItem from "../components/Shop/ShopItem.vue";
 
 // libs
 import { mapGetters, mapState } from "vuex";
@@ -87,11 +82,16 @@ import { mapGetters, mapState } from "vuex";
 export default {
   components: {
     // NavbarInside
-    // ShopItem
+    ShopItem
   },
   computed: {
     ...mapState("navbar", ["navbarActive"]),
-    ...mapGetters("apis", ["getCategory"])
+    ...mapGetters("apis", ["getCategory", "getProductsByCategory"]),
+    recents() {
+      return this.getProductsByCategory(this.item.categories).filter(
+        item => item.id !== this.$route.params.slug
+      );
+    }
   },
 
   data() {

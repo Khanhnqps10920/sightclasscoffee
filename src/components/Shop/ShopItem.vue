@@ -8,7 +8,7 @@
       <img class="img-fluid" :src="item.imgUrl" alt="product-img" />
     </b-link>
     <div class="shop-item__description text-center">
-      <p class="shop-item__description-category">{{ getCategory(item.coffeeCategories).name }}</p>
+      <p v-if="item.coffeeCategories" class="shop-item__description-category">{{ getCategory(item.coffeeCategories).name }}</p>
       <h3 class="shop-item__description-name">{{ item.name.substr(0,23) }}</h3>
       <p class="shop-item__description-price">${{ item.price }}</p>
     </div>
