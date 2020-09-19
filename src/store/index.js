@@ -5,43 +5,68 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-
   modules: {
-
     // cart
     cart: {
       namespaced: true,
 
       // state
-      state: () => ({}),
+      state: () => ({
+        cart: [],
+      }),
 
       // getter
 
-      // mutations  
-      mutations: {}
+      // mutations
+      mutations: {
+        ADD_ONE_TO_CART: (state, item) => {
+          const cart = [...state.cart];
+
+          const itemIndex = cart.findIndex(
+            (cartItem) => cartItem.id === item.id
+          );
+
+          if (itemIndex !== -1) {
+            cart[itemIndex] = {
+              ...cart[itemIndex],
+              quantity: cart[itemIndex].quantity + 1,
+            };
+          } else {
+            const newItem = {
+              ...item,
+              quantity: 1,
+            };
+
+            cart.push(newItem);
+          }
+
+          state.cart = cart;
+        },
+      },
 
       // actions
+      actions: {},
     },
 
     // navbar
     navbar: {
       namespaced: true,
-      // state 
+      // state
       state: () => ({
         navbarActive: false,
-        adminSidebarActive: true
+        adminSidebarActive: true,
       }),
 
       // mutations
       mutations: {
-        handleNavbarActive: state => {
+        handleNavbarActive: (state) => {
           state.navbarActive = !state.navbarActive;
         },
 
-        handleAdminSidebarActive: state => {
+        handleAdminSidebarActive: (state) => {
           state.adminSidebarActive = !state.adminSidebarActive;
-        }
-      }
+        },
+      },
     },
 
     // apis
@@ -51,17 +76,25 @@ export default new Vuex.Store({
       state: () => ({
         categories: [],
         coffeeCategories: [],
-        products: []
+        products: [],
       }),
 
       getters: {
         getCategory: (state) => (categoryId) => {
-          return state.coffeeCategories.find(category => category.id === categoryId)
+          return state.coffeeCategories.find(
+            (category) => category.id === categoryId
+          );
         },
 
         getProductsByCategory: (state) => (categoryId) => {
-          return state.products.filter(product => product.categories === categoryId)
-        }
+          return state.products.filter(
+            (product) => product.categories === categoryId
+          );
+        },
+
+        getProductById: (state) => (productId) => {
+          return state.products.find((product) => product.id === productId);
+        },
       },
 
       mutations: {
@@ -75,75 +108,74 @@ export default new Vuex.Store({
 
         FETCH_PRODUCTS: (state, payload) => {
           state.products = payload;
-        }
+        },
       },
 
       actions: {
-        getCategories: ({
-          commit
-        }) => {
+        getCategories: ({ commit }) => {
           const categories = [];
 
-          db.collection("categories").get().then(snapShot => {
-            snapShot.forEach(doc => {
-              const category = {
-                id: doc.id,
-                ...doc.data()
-              }
+          db.collection("categories")
+            .get()
+            .then((snapShot) => {
+              snapShot.forEach((doc) => {
+                const category = {
+                  id: doc.id,
+                  ...doc.data(),
+                };
 
-              categories.push(category)
+                categories.push(category);
+              });
+
+              commit("FETCH_CATEGORIES", categories);
             })
-
-            commit("FETCH_CATEGORIES", categories);
-
-          }).catch(e => {
-            console.log(e)
-          })
-
+            .catch((e) => {
+              console.log(e);
+            });
         },
 
-        getCoffeeCategories: ({
-          commit
-        }) => {
+        getCoffeeCategories: ({ commit }) => {
           const categories = [];
-          db.collection("coffee-categories").get().then(snapShot => {
-            snapShot.forEach(doc => {
-              const category = {
-                id: doc.id,
-                ...doc.data()
-              }
+          db.collection("coffee-categories")
+            .get()
+            .then((snapShot) => {
+              snapShot.forEach((doc) => {
+                const category = {
+                  id: doc.id,
+                  ...doc.data(),
+                };
 
-              categories.push(category)
+                categories.push(category);
+              });
+              console.log(categories);
+              commit("FETCH_COFFEE_CATE", categories);
             })
-            console.log(categories);
-            commit("FETCH_COFFEE_CATE", categories);
-
-          }).catch(e => {
-            console.log(e)
-          })
+            .catch((e) => {
+              console.log(e);
+            });
         },
 
-        getProducts: ({
-          commit
-        }) => {
+        getProducts: ({ commit }) => {
           const products = [];
-          db.collection("products").get().then(snapShot => {
-            snapShot.forEach(doc => {
-              const product = {
-                id: doc.id,
-                ...doc.data()
-              }
+          db.collection("products")
+            .get()
+            .then((snapShot) => {
+              snapShot.forEach((doc) => {
+                const product = {
+                  id: doc.id,
+                  ...doc.data(),
+                };
 
-              products.push(product);
+                products.push(product);
+              });
+
+              commit("FETCH_PRODUCTS", products);
             })
-
-            commit("FETCH_PRODUCTS", products);
-          }).catch(e => {
-            console.log(e)
-          })
-        }
-      }
-    }
-
-  }
+            .catch((e) => {
+              console.log(e);
+            });
+        },
+      },
+    },
+  },
 });

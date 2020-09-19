@@ -2,100 +2,24 @@
   <b-sidebar id="sidebar-backdrop" class="cart-side-bar" title="Your Cart" backdrop right shadow>
     <div class="px-3 py-2 cart-items">
       <!-- cart item -->
-      <div class="cart-items__item d-flex justify-content-between align-items-center">
+      <div
+        v-for="item in cart"
+        :key="item.id"
+        class="cart-items__item d-flex justify-content-between align-items-center"
+      >
         <div class="cart-items__item-img">
-          <img src="@/assets/images/product.webp" class="img-fluid" alt="cart-item" />
+          <img :src="item.imgUrl" class="img-fluid" alt="cart-item" />
         </div>
         <div class="cart-items__item-info">
-          <h3>Organic Blueboon 12oz/whole bean</h3>
+          <h3>{{ item.name }}</h3>
           <div class="cart-items__item-info--qm d-flex align-items-center">
             <b-form-group>
-              <b-form-input type="number"></b-form-input>
+              <b-form-input type="number" :value="item.quantity"></b-form-input>
             </b-form-group>
 
             <p>
               at
-              <strong>$18.00</strong>
-            </p>
-          </div>
-        </div>
-
-        <b-icon class="cart-items__item-trash" icon="trash"></b-icon>
-      </div>
-      <div class="cart-items__item d-flex justify-content-between align-items-center">
-        <div class="cart-items__item-img">
-          <img src="@/assets/images/product.webp" class="img-fluid" alt="cart-item" />
-        </div>
-        <div class="cart-items__item-info">
-          <h3>Organic Blueboon 12oz/whole bean</h3>
-          <div class="cart-items__item-info--qm d-flex align-items-center">
-            <b-form-group>
-              <b-form-input type="number"></b-form-input>
-            </b-form-group>
-
-            <p>
-              at
-              <strong>$18.00</strong>
-            </p>
-          </div>
-        </div>
-
-        <b-icon class="cart-items__item-trash" icon="trash"></b-icon>
-      </div>
-      <div class="cart-items__item d-flex justify-content-between align-items-center">
-        <div class="cart-items__item-img">
-          <img src="@/assets/images/product.webp" class="img-fluid" alt="cart-item" />
-        </div>
-        <div class="cart-items__item-info">
-          <h3>Organic Blueboon 12oz/whole bean</h3>
-          <div class="cart-items__item-info--qm d-flex align-items-center">
-            <b-form-group>
-              <b-form-input type="number"></b-form-input>
-            </b-form-group>
-
-            <p>
-              at
-              <strong>$18.00</strong>
-            </p>
-          </div>
-        </div>
-
-        <b-icon class="cart-items__item-trash" icon="trash"></b-icon>
-      </div>
-      <div class="cart-items__item d-flex justify-content-between align-items-center">
-        <div class="cart-items__item-img">
-          <img src="@/assets/images/product.webp" class="img-fluid" alt="cart-item" />
-        </div>
-        <div class="cart-items__item-info">
-          <h3>Organic Blueboon 12oz/whole bean</h3>
-          <div class="cart-items__item-info--qm d-flex align-items-center">
-            <b-form-group>
-              <b-form-input type="number"></b-form-input>
-            </b-form-group>
-
-            <p>
-              at
-              <strong>$18.00</strong>
-            </p>
-          </div>
-        </div>
-
-        <b-icon class="cart-items__item-trash" icon="trash"></b-icon>
-      </div>
-      <div class="cart-items__item d-flex justify-content-between align-items-center">
-        <div class="cart-items__item-img">
-          <img src="@/assets/images/product.webp" class="img-fluid" alt="cart-item" />
-        </div>
-        <div class="cart-items__item-info">
-          <h3>Organic Blueboon 12oz/whole bean</h3>
-          <div class="cart-items__item-info--qm d-flex align-items-center">
-            <b-form-group>
-              <b-form-input type="number"></b-form-input>
-            </b-form-group>
-
-            <p>
-              at
-              <strong>$18.00</strong>
+              <strong>${{ item.price }}</strong>
             </p>
           </div>
         </div>
@@ -119,7 +43,13 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+
+export default {
+  computed: {
+    ...mapState("cart", ["cart"])
+  }
+};
 </script>
 
 <style lang="scss" >

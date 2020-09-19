@@ -8,18 +8,25 @@
       <img class="img-fluid" :src="item.imgUrl" alt="product-img" />
     </b-link>
     <div class="shop-item__description text-center">
-      <p v-if="item.coffeeCategories" class="shop-item__description-category">{{ getCategory(item.coffeeCategories).name }}</p>
+      <p
+        v-if="item.coffeeCategories"
+        class="shop-item__description-category"
+      >{{ getCategory(item.coffeeCategories).name }}</p>
       <h3 class="shop-item__description-name">{{ item.name.substr(0,23) }}</h3>
       <p class="shop-item__description-price">${{ item.price }}</p>
     </div>
 
-    <button class="btn-add shop-item__item-btn d-block mx-auto">Add to Bag</button>
+    <button
+      @click="handleAddToCart"
+      v-b-toggle.sidebar-backdrop
+      class="btn-add shop-item__item-btn d-block mx-auto"
+    >Add to Bag</button>
   </div>
 </template>
 
 <script>
 // libs
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   props: {
@@ -35,6 +42,14 @@ export default {
 
   computed: {
     ...mapGetters("apis", ["getCategory"])
+  },
+  methods: {
+    ...mapMutations("cart", ["ADD_ONE_TO_CART"]),
+
+    handleAddToCart(e) {
+      e.stopPropagation();
+      this.ADD_ONE_TO_CART(this.item);
+    }
   }
 };
 </script>

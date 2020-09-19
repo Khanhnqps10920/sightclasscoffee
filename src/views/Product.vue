@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import db from "@/firebase/init.js";
+// import db from "@/firebase/init.js";
 // import NavbarInside from "../components/Navbar/NavbarInside.vue";
 import ShopItem from "../components/Shop/ShopItem.vue";
 
@@ -86,34 +86,42 @@ export default {
   },
   computed: {
     ...mapState("navbar", ["navbarActive"]),
-    ...mapGetters("apis", ["getCategory", "getProductsByCategory"]),
+    ...mapGetters("apis", [
+      "getCategory",
+      "getProductsByCategory",
+      "getProductById"
+    ]),
     recents() {
       return this.getProductsByCategory(this.item.categories).filter(
         item => item.id !== this.$route.params.slug
       );
+    },
+
+    item() {
+      return this.getProductById(this.$route.params.slug);
     }
   },
 
   data() {
     return {
-      selected: null,
-      item: {}
+      selected: null
+      // item: {}
     };
   },
 
   created() {
-    db.collection("products")
-      .doc(this.$route.params.slug)
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          console.log(doc.data());
-          this.item = { ...doc.data() };
-        }
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    // db.collection("products")
+    //   .doc(this.$route.params.slug)
+    //   .get()
+    //   .then(doc => {
+    //     if (doc.exists) {
+    //       console.log(doc.data());
+    //       this.item = { ...doc.data() };
+    //     }
+    //   })
+    //   .catch(e => {
+    //     console.log(e);
+    //   });
   }
 };
 </script>
