@@ -41,10 +41,14 @@
             <div class="product__information--add d-flex justify-content-center align-items-center">
               <div class="product__information--add-quantity">
                 <span>Qty</span>
-                <input type="number" value="1" />
+                <input type="number" v-model="itemQuantity" />
               </div>
 
-              <button class="btn-add">Add To Card</button>
+              <button
+                v-b-toggle.sidebar-backdrop
+                @click="handleAddToCart"
+                class="btn-add"
+              >Add To Card</button>
             </div>
 
             <div class="product__information--detail">
@@ -77,13 +81,22 @@
 import ShopItem from "../components/Shop/ShopItem.vue";
 
 // libs
-import { mapGetters, mapState } from "vuex";
+import { mapGetters, mapState, mapMutations } from "vuex";
 
 export default {
   components: {
     // NavbarInside
     ShopItem
   },
+  methods: {
+    ...mapMutations("cart", ["ADD_ITEM_TO_CART"]),
+    handleAddToCart() {
+      const itemAdded = { ...this.item, quantity: Number(this.itemQuantity) };
+
+      this.ADD_ITEM_TO_CART(itemAdded);
+    }
+  },
+
   computed: {
     ...mapState("navbar", ["navbarActive"]),
     ...mapGetters("apis", [
@@ -104,7 +117,9 @@ export default {
 
   data() {
     return {
-      selected: null
+      selected: null,
+      itemQuantity: 1
+
       // item: {}
     };
   },

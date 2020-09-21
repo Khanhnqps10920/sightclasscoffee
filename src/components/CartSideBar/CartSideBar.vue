@@ -14,7 +14,11 @@
           <h3>{{ item.name }}</h3>
           <div class="cart-items__item-info--qm d-flex align-items-center">
             <b-form-group>
-              <b-form-input type="number" :value="item.quantity"></b-form-input>
+              <b-form-input
+                type="number"
+                @keyup="handleAddItemQuantity(item)"
+                v-model="item.quantity"
+              ></b-form-input>
             </b-form-group>
 
             <p>
@@ -48,6 +52,13 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState("cart", ["cart"])
+  },
+
+  methods: {
+    handleAddItemQuantity(item) {
+      console.log(item, item.quantity);
+      console.log(this.cart, "cart");
+    }
   }
 };
 </script>

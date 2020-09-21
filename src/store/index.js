@@ -42,6 +42,30 @@ export default new Vuex.Store({
 
           state.cart = cart;
         },
+
+        ADD_ITEM_TO_CART: (state, item) => {
+          const cart = [...state.cart];
+
+          const itemIndex = cart.findIndex(
+            (cartItem) => cartItem.id === item.id
+          );
+
+          if (itemIndex !== -1) {
+            cart[itemIndex] = {
+              ...cart[itemIndex],
+              quantity: cart[itemIndex].quantity + item.quantity
+            };
+          } else {
+            const newItem = {
+              ...item,
+              quantity: item.quantity
+            };
+
+            cart.push(newItem);
+          }
+
+          state.cart = cart;
+        }
       },
 
       // actions
