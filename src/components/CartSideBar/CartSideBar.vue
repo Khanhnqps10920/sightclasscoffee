@@ -1,5 +1,12 @@
 <template>
-  <b-sidebar id="sidebar-backdrop" class="cart-side-bar" title="Your Cart" backdrop right shadow>
+  <b-sidebar
+    id="sidebar-backdrop"
+    class="cart-side-bar"
+    title="Your Cart"
+    backdrop
+    right
+    shadow
+  >
     <div class="px-3 py-2 cart-items">
       <!-- cart item -->
       <div
@@ -40,17 +47,17 @@
         </p>
       </div>
       <h2 class="text-center">Shipping & Taxes Calculated At Checkout</h2>
-
       <router-link to="/checkout">Checkout</router-link>
     </div>
   </b-sidebar>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   computed: {
+    ...mapGetters("cart", ["getCartItem"]),
     ...mapState("cart", ["cart"])
   },
 

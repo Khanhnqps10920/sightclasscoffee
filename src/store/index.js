@@ -16,6 +16,11 @@ export default new Vuex.Store({
       }),
 
       // getter
+      getters: {
+        getCartItem: (state) => (itemId) => {
+          return state.cart.find((item) => item.id === itemId);
+        },
+      },
 
       // mutations
       mutations: {
@@ -53,19 +58,19 @@ export default new Vuex.Store({
           if (itemIndex !== -1) {
             cart[itemIndex] = {
               ...cart[itemIndex],
-              quantity: cart[itemIndex].quantity + item.quantity
+              quantity: cart[itemIndex].quantity + item.quantity,
             };
           } else {
             const newItem = {
               ...item,
-              quantity: item.quantity
+              quantity: item.quantity,
             };
 
             cart.push(newItem);
           }
 
           state.cart = cart;
-        }
+        },
       },
 
       // actions
