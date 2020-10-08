@@ -23,29 +23,36 @@
           <div class="checkout__total">
             <div class="checkout__total--cart">
               <div
-                class="checkout__total--cart-item d-flex justify-content-between align-items-center"
+                class="checkout__total--cart-item mb-3 d-flex justify-content-between align-items-center"
+                v-for="item in cart"
+                :key="item.id"
               >
                 <div class="d-flex align-items-center">
                   <div class="checkout__total--cart-item-img">
                     <b-img
-                      src="https://picsum.photos/250/250/?image=54"
+                      :src="item.imgUrl"
                       thumbnail
                       fluid
                       alt="img cart"
                     ></b-img>
                   </div>
                   <div class="checkout__total--cart-item-name">
-                    <h3>Item Name</h3>
-                    <p>Item Information</p>
+                    <h3>{{ item.name }}</h3>
+                    <p>Quantity: {{ item.quantity }}</p>
                   </div>
                 </div>
-                <p class="checkout__total--cart-item-price">$20.00</p>
+                <p class="checkout__total--cart-item-price">
+                  ${{ item.price * item.quantity }}
+                </p>
               </div>
             </div>
 
             <hr />
             <b-form-group>
-              <b-form-input type="text" placeholder="Gift card or discount code"></b-form-input>
+              <b-form-input
+                type="text"
+                placeholder="Gift card or discount code"
+              ></b-form-input>
             </b-form-group>
 
             <hr />
@@ -54,7 +61,7 @@
               <div class="d-flex justify-content-between align-items-center">
                 <p>Subtotal</p>
                 <p>
-                  <strong>$18.00</strong>
+                  <strong>${{ getCartTotal }}</strong>
                 </p>
               </div>
               <div class="d-flex justify-content-between align-items-center">
@@ -72,7 +79,7 @@
             >
               <p>Total</p>
               <p>
-                <strong>$18.00</strong>
+                <strong>${{ getCartTotal }}</strong>
               </p>
             </div>
           </div>
@@ -83,6 +90,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
 import CheckOutForm from "../components/Form/CheckOutForm.vue";
 // components
 
@@ -91,6 +99,11 @@ import CheckOutForm from "../components/Form/CheckOutForm.vue";
 export default {
   components: {
     CheckOutForm
+  },
+
+  computed: {
+    ...mapState("cart", ["cart"]),
+    ...mapGetters("cart", ["getCartTotal"])
   }
 };
 </script>

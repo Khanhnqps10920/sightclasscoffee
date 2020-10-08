@@ -193,6 +193,11 @@ input[type="number"] {
       border-color: $base-color;
       box-shadow: 0 0 0 0.2rem #795548;
     }
+
+    &.error {
+      border-color: red;
+      box-shadow: none;
+    }
   }
 }
 

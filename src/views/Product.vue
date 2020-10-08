@@ -9,14 +9,13 @@
         </b-col>
         <b-col class="product__right-side" sm="6">
           <div class="product__information">
-            <p
-              v-if="item.coffeeCategories"
-              class="product__information--type"
-            >{{ getCategory(item.coffeeCategories).name.toUpperCase() }}</p>
+            <p v-if="item.coffeeCategories" class="product__information--type">
+              {{ getCategory(item.coffeeCategories).name.toUpperCase() }}
+            </p>
             <h1 class="product__information--name">{{ item.name }}</h1>
 
             <div class="product__information--material">
-              <span>{{ item.ingredients ? item.ingredients.join() : '' }}</span>
+              <span>{{ item.ingredients ? item.ingredients.join() : "" }}</span>
             </div>
 
             <div
@@ -38,7 +37,9 @@
               </div>-->
             </div>
 
-            <div class="product__information--add d-flex justify-content-center align-items-center">
+            <div
+              class="product__information--add d-flex justify-content-center align-items-center"
+            >
               <div class="product__information--add-quantity">
                 <span>Qty</span>
                 <input type="number" v-model="itemQuantity" />
@@ -48,15 +49,41 @@
                 v-b-toggle.sidebar-backdrop
                 @click="handleAddToCart"
                 class="btn-add"
-              >Add To Card</button>
+              >
+                Add To Card
+              </button>
             </div>
 
             <div class="product__information--detail">
               <h2>Coffee Detail</h2>
-              <p>{{ item.description}}</p>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia praesentium ipsam, itaque modi rerum ipsa rem, facilis adipisci sint mollitia est sequi! Qui minus soluta dicta vel, illum alias laudantium voluptatem ratione modi quibusdam natus maxime. Illum magni, sunt quisquam repellendus nulla atque debitis mollitia! Tenetur aspernatur assumenda, similique nam libero, consequuntur, vero laborum rem cumque quis unde quia tempore?</p>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia praesentium ipsam, itaque modi rerum ipsa rem, facilis adipisci sint mollitia est sequi! Qui minus soluta dicta vel, illum alias laudantium voluptatem ratione modi quibusdam natus maxime. Illum magni, sunt quisquam repellendus nulla atque debitis mollitia! Tenetur aspernatur assumenda, similique nam libero, consequuntur, vero laborum rem cumque quis unde quia tempore?</p>
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia praesentium ipsam, itaque modi rerum ipsa rem, facilis adipisci sint mollitia est sequi! Qui minus soluta dicta vel, illum alias laudantium voluptatem ratione modi quibusdam natus maxime. Illum magni, sunt quisquam repellendus nulla atque debitis mollitia! Tenetur aspernatur assumenda, similique nam libero, consequuntur, vero laborum rem cumque quis unde quia tempore?</p>
+              <p>{{ item.description }}</p>
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia
+                praesentium ipsam, itaque modi rerum ipsa rem, facilis adipisci
+                sint mollitia est sequi! Qui minus soluta dicta vel, illum alias
+                laudantium voluptatem ratione modi quibusdam natus maxime. Illum
+                magni, sunt quisquam repellendus nulla atque debitis mollitia!
+                Tenetur aspernatur assumenda, similique nam libero,
+                consequuntur, vero laborum rem cumque quis unde quia tempore?
+              </p>
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia
+                praesentium ipsam, itaque modi rerum ipsa rem, facilis adipisci
+                sint mollitia est sequi! Qui minus soluta dicta vel, illum alias
+                laudantium voluptatem ratione modi quibusdam natus maxime. Illum
+                magni, sunt quisquam repellendus nulla atque debitis mollitia!
+                Tenetur aspernatur assumenda, similique nam libero,
+                consequuntur, vero laborum rem cumque quis unde quia tempore?
+              </p>
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia
+                praesentium ipsam, itaque modi rerum ipsa rem, facilis adipisci
+                sint mollitia est sequi! Qui minus soluta dicta vel, illum alias
+                laudantium voluptatem ratione modi quibusdam natus maxime. Illum
+                magni, sunt quisquam repellendus nulla atque debitis mollitia!
+                Tenetur aspernatur assumenda, similique nam libero,
+                consequuntur, vero laborum rem cumque quis unde quia tempore?
+              </p>
             </div>
           </div>
         </b-col>
@@ -66,7 +93,14 @@
       <h3 class="text-center">RECENT ARRIVALS</h3>
       <b-container fluid>
         <b-row>
-          <b-col cols="12" sm="12" md="6" lg="4" v-for="item in recents" :key="item.id">
+          <b-col
+            cols="12"
+            sm="12"
+            md="6"
+            lg="4"
+            v-for="item in recents"
+            :key="item.id"
+          >
             <ShopItem :whiteMode="true" :item="item" />
           </b-col>
         </b-row>
@@ -105,9 +139,9 @@ export default {
       "getProductById"
     ]),
     recents() {
-      return this.getProductsByCategory(this.item.categories).filter(
-        item => item.id !== this.$route.params.slug
-      );
+      return this.getProductsByCategory(this.item.categories)
+        .filter(item => item.id !== this.$route.params.slug)
+        .splice(0, 3);
     },
 
     item() {

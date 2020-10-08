@@ -23,8 +23,8 @@
             <b-form-group>
               <b-form-input
                 type="number"
-                @keyup="handleAddItemQuantity(item)"
-                v-model="item.quantity"
+                @blur="e => handleAddItemQuantity(e, item)"
+                :value="item.quantity"
               ></b-form-input>
             </b-form-group>
 
@@ -35,15 +35,19 @@
           </div>
         </div>
 
-        <b-icon class="cart-items__item-trash" icon="trash"></b-icon>
+        <b-icon
+          class="cart-items__item-trash"
+          @click="handleRemoveItem(item)"
+          icon="trash"
+        ></b-icon>
       </div>
     </div>
 
     <div class="cart-total">
       <div class="d-flex justify-content-between align-items-center">
-        <p>Item Total</p>
+        <p>Items Total</p>
         <p>
-          <strong>$18.00</strong>
+          <strong>${{ getCartTotal }}.00</strong>
         </p>
       </div>
       <h2 class="text-center">Shipping & Taxes Calculated At Checkout</h2>
@@ -53,18 +57,33 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters("cart", ["getCartItem"]),
+    ...mapGetters("cart", ["getCartItem", "getCartTotal"]),
     ...mapState("cart", ["cart"])
   },
 
   methods: {
-    handleAddItemQuantity(item) {
-      console.log(item, item.quantity);
-      console.log(this.cart, "cart");
+    ...mapMutations("cart", ["UPDATE_CART_QUANTITY", "REMOVE_CART_ITEM"]),
+    handleAddItemQuantity(e, item) {
+      if (!e.target.value) {
+        if (window.confirm(`Bạn có muốn xóa sản phẩm ${item.name}?`)) {
+          console.log(item);
+          this.REMOVE_CART_ITEM(item);
+        } else {
+          e.target.value = item.quantity;
+        }
+      }
+      this.UPDATE_CART_QUANTITY({ item, quantity: Number(e.target.value) });
+    },
+
+    handleRemoveItem(item) {
+      if (window.confirm(`Bạn có muốn xóa sản phẩm ${item.name}?`)) {
+        console.log(item);
+        this.REMOVE_CART_ITEM(item);
+      }
     }
   }
 };
@@ -93,6 +112,10 @@ export default {
 
     &__item {
       margin: 3rem 0;
+
+      svg {
+        cursor: pointer;
+      }
 
       &-img {
         width: 20%;
