@@ -43,22 +43,22 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState("navbar", ["adminSidebarActive"])
-  }
+    ...mapState("navbar", ["adminSidebarActive"]),
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 @import "@/assets/scss/variable.scss";
 
 .ad-sidebar {
   height: 100%;
   overflow: hidden;
+  width: 100%;
+  height: 500px;
 
   &__menu {
     width: 21rem !important;
-
-    width: 100%;
 
     li {
       padding: 2rem;

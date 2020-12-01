@@ -1,8 +1,47 @@
 <template>
   <div class="admin admin-wrapper">
-    <div class="admin__sidebar-container" :class="{ active: !adminSidebarActive }">
-      <AdminSideBar />
+    <div
+      class="admin__sidebar-container"
+      :class="{ active: !adminSidebarActive }"
+    >
+      <ul class="ad-sidebar__menu">
+        <li class="ad-sidebar__menu-item">
+          <router-link to="/admin">
+            <b-icon-clipboard-data></b-icon-clipboard-data>
+            <span>Dashboard</span>
+          </router-link>
+        </li>
+
+        <li class="ad-sidebar__menu-item">
+          <router-link :to="{ name: 'AddCategory' }">
+            <b-icon-card-text></b-icon-card-text>
+            <span>Category</span>
+          </router-link>
+        </li>
+
+        <li class="ad-sidebar__menu-item">
+          <router-link :to="{ name: 'AddCoffeeCategory' }">
+            <b-icon-cup></b-icon-cup>
+            <span>Coffee Category</span>
+          </router-link>
+        </li>
+
+        <li class="ad-sidebar__menu-item">
+          <router-link :to="{ name: 'AddProduct' }">
+            <b-icon-cup></b-icon-cup>
+            <span>Product</span>
+          </router-link>
+        </li>
+
+        <li class="ad-sidebar__menu-item">
+          <router-link to="/add-product">
+            <b-icon-cart></b-icon-cart>
+            <span>Orders</span>
+          </router-link>
+        </li>
+      </ul>
     </div>
+    <AdminSideBar />
 
     <div class="admin__main-container" :class="{ active: !adminSidebarActive }">
       <AdminNavbar />
@@ -17,7 +56,7 @@
 <script>
 // db
 // components
-import AdminSideBar from "../../components/admin/AdminSideBar/AdminSideBar.vue";
+import AdminSideBar from "@/components/admin/AdminSideBar/AdminSideBar.vue";
 import AdminNavbar from "../../components/admin/AdminNavbar/AdminNavbar.vue";
 
 // libs
@@ -25,13 +64,13 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState("navbar", ["adminSidebarActive"])
+    ...mapState("navbar", ["adminSidebarActive"]),
   },
 
   components: {
     AdminSideBar,
-    AdminNavbar
-  }
+    AdminNavbar,
+  },
 };
 </script>
 
@@ -172,6 +211,9 @@ export default {
     left: 0;
     bottom: 0;
     transition: width 0.1s ease;
+    span {
+      visibility: visible;
+    }
 
     &.active {
       width: 5.4rem !important;

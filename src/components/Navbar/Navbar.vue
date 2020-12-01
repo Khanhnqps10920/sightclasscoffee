@@ -6,7 +6,7 @@
           <router-link to="/">Home</router-link>
         </li>
         <li class="navbar__item">
-          <router-link to="/shop">Shop</router-link>
+          <router-link to="/collection">Shop</router-link>
         </li>
         <li class="navbar__item">
           <router-link to="/link">Link</router-link>
@@ -24,9 +24,9 @@ export default {
   props: {
     isActive: {
       type: Boolean,
-      default: false
-    }
-  }
+      default: false,
+    },
+  },
 };
 </script>
 
