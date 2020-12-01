@@ -9,18 +9,19 @@
         :class="{ error: $v.email.$error }"
       ></b-form-input>
     </b-form-group>
-
-    <label class="mt-5 mb-3">Shipping Address</label>
+    <p class="text-danger text-sm" v-if="$v.email.$error">Email not valid</p>
+    <label class="mt-3 mb-3">Shipping Address</label>
     <div class="d-flex checkout-form__inps justify-content-between">
       <b-form-group>
         <b-form-input
           type="text"
-          required
+          required 
           v-model.trim="$v.firstName.$model"
           placeholder="First Name"
           :class="{ error: $v.firstName.$error }"
         ></b-form-input>
       </b-form-group>
+
       <b-form-group>
         <b-form-input
           type="text"
@@ -31,6 +32,8 @@
         ></b-form-input>
       </b-form-group>
     </div>
+    <p class="text-danger text-sm mb-3" v-if="$v.firstName.$error || $v.lastName.$error">First Name and Last Name is required</p>
+
     <b-form-group>
       <b-form-input
         type="text"
@@ -38,6 +41,7 @@
         placeholder="Company(optional)"
       ></b-form-input>
     </b-form-group>
+
     <b-form-group>
       <b-form-input
         type="text"
@@ -47,6 +51,8 @@
         placeholder="Address"
       ></b-form-input>
     </b-form-group>
+    <p class="text-danger text-sm mb-3" v-if="$v.address.$error">Address is required</p>
+
     <b-form-group>
       <b-form-input
         type="text"
@@ -63,6 +69,8 @@
         placeholder="City"
       ></b-form-input>
     </b-form-group>
+    <p class="text-danger text-sm mb-3" v-if="$v.city.$error">City is required</p>
+
 
     <b-form-group>
       <b-form-checkbox value="save" v-model="saveInfo"
@@ -91,7 +99,7 @@ export default {
       firstName: null,
       lastName: null,
       company: null,
-      Address: null,
+      address: null,
       apartment: null,
       city: null,
       saveInfo: false

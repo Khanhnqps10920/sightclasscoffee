@@ -128,6 +128,11 @@ ul {
   list-style-type: none;
 }
 
+.text-sm {
+  font-size:1.2rem;
+}
+
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
